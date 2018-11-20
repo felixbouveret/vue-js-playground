@@ -1,0 +1,97 @@
+.menu_burger_container
+{
+    width: 64px;
+    height: 64px;
+    margin: 0.5em;
+}
+.menu_burger
+{
+    position: absolute;
+    color: #000;
+    margin: 31px 0px;
+    width: 63px;
+    height: 2px;
+    transition: 0.5s;
+    background-color: currentColor;
+}
+.menu_burger:before
+{
+    top: -21px;
+    content: "";
+    position: absolute;
+    width: 63px;
+    height: 2px;
+    background-color: currentColor;
+}
+.menu_burger:after
+{
+    bottom: -21px;
+    content: "";
+    position: absolute;
+    width: 63px;
+    height: 2px;    
+    background-color: currentColor;
+}
+
+.close_menu
+{
+    position: absolute;
+    color: black;
+    margin: 33px 0;
+    width: 63px;
+    transition: 0.5s;
+    transform: rotate(360deg);
+}
+.close_menu:before
+{
+    content: "";
+    position: absolute;
+    width: 63px;
+    height: 1px;
+    background-color: currentColor;
+    transform: rotate(-45deg);
+}
+.close_menu:after
+{
+    content: "";
+    position: absolute;
+    width: 63px;
+    height: 1px;
+    background-color: currentColor;
+    transform: rotate(45deg);
+}
+
+
+ul, li
+{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+h1
+{
+    margin: 0;
+    text-align: center;
+    line-height: 64px;
+}
+.menu_container
+{
+    position: absolute;
+    transition: 0.5s;    
+    width: 200px;
+    overflow: hidden;
+}
+.menu_item
+{
+    border-bottom: black solid 1px;
+    cursor: pointer;
+    transition: 0.5s;
+    height: 64px;
+}
+.menu_close
+{
+    overflow: hidden;
+    width: 0;
+    transition: 0.5s;
+}
+

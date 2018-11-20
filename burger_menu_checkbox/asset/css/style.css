@@ -1,0 +1,28 @@
+body, html { margin: 0; padding: 0;}
+
+
+.burger input{ display: none;}
+
+input:checked + .burger-container + .menu {
+    left:0;
+}
+.burger-container {
+    width: 30px;
+    height: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.burger-container span {
+    display: block;
+    width: 20px;
+    height: 3px;
+    border-radius: 200px;
+    background: red;
+}
+
+.menu { 
+    position: absolute;
+    left: -300px;
+    transition: 0.5s;
+}

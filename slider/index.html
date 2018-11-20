@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="asset/css/style.css">
+    <title>Slider</title>
+</head>
+
+<body>
+    <div class="slider__container">
+        <div onclick="plusDivs(-1)" class="slider__button slider__button-left">-</div>
+        <div onclick="plusDivs(-1)" class="slider__button slider__button-right">+</div>
+        <div class="slider__content">
+            <ul class="slider__list">
+                <li class="slider__list__item"><img src="" alt=""></li>
+                <li class="slider__list__item"><img src="" alt=""></li>
+                <li class="slider__list__item"><img src="" alt=""></li>
+                <li class="slider__list__item"><img src="" alt=""></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // var x = document.getElementsByClassName("slider__list__item");
+        // var n = 3;
+        // if(n<0 || n>x.length) {
+        //    n = 0;
+        // }
+        // x[n].style.display = "block";
+
+        // on déclare la varible slideIndex qui vaut 1
+        var slideIndex = 1;
+        // on montre les divs de slideIndex
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("slider__list__item");
+            if (n > x.length) { 
+                slideIndex = 1 ;
+            }
+            if (n < 1) { 
+                slideIndex = x.length ;
+            };
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
