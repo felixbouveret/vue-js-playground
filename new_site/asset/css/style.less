@@ -1,0 +1,178 @@
+@writing_color : black;
+@color_liens : #808080;
+@second_color : #7187A8;
+*{
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    width: 0px;
+}
+body,html{
+    font-family: 'Noto Sans TC', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    color: @writing_color;
+}
+
+h2{
+    color: black;
+    margin: 0 0 1em 0;
+    font-weight: normal;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+h3{
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 0.8em;
+    letter-spacing: .5em;
+    font-weight: normal;
+    margin: 0;
+    margin-top: 1em;
+}
+
+header{
+    z-index: 1;
+    background-color: white;
+    .logo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 100px;
+        height: 100px;
+        font-weight: bolder;
+        background-color: black;
+        overflow-y: auto;
+        span{
+            color: white;
+        }
+    }
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    left: 0;
+    height: 100vh;
+    width: 25vw;
+    padding: 2.5vh 2em 2.5vh 1em;
+    p{
+        text-align: right;
+        font-size: 0.8em;
+        font-weight: lighter;
+    }
+    ul{
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0;
+        height: 25vh;
+    }
+    li{
+        list-style: none;
+        text-align: right;
+        a{
+            position: relative;
+            letter-spacing: 0.25em;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-decoration: none;
+            color: @color_liens;
+            transition: ease .15s;
+            &::after{
+                content: "";
+                background-color: black;
+                position: absolute;
+                width: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                height: 1px;
+                bottom: -1px;
+                transition: ease .15s;
+            }
+        }
+
+        a:hover{
+            color: black;
+            &::after{
+                width: 100%;
+            }
+        }
+        div.header_footer{
+            height: 10%;
+            width: 100%;
+            overflow-y: auto;
+        }
+    }
+}
+
+section.main{
+    width: 75vw;
+    p{
+        margin: 0;
+    }
+    div.bloc_blanc{
+        position: absolute;
+        opacity: 0;
+        transition: ease 1s;
+        bottom: 2em;
+        margin-bottom: -5em;
+        left: 2em;
+        width: 50vw;
+        height: 30vh;
+        padding: 1em;
+        background-color: white;
+    }
+    div.photo{
+        position: relative;
+        transition: 4s;
+        height: 100vh;
+        overflow: auto;
+        background-position: center;
+        background-size: cover;
+        background-image: url("../img/portfolio/nature.jpg")
+    }
+    div.wrapper{
+        height: 50px;
+        width: 100%;
+    }
+    div.test{
+        margin-bottom: 50px;
+        margin-right: 20px;
+        text-align: left;
+        background-color: white;
+        .flex_test{
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            div{
+                padding: 1em;
+                min-width: 500px;
+                max-width: 50%;
+                opacity: 0;
+                margin-left: -10em;
+                transition: ease-in-out 1.5s;
+            }
+        }
+        #img_laptop_beach{
+            max-width: 400px;
+            height: 500px;
+            width: 40%;
+            margin: 1em;
+            background: #808080;
+            margin-left: -10em;
+            opacity: 0;
+            transition: ease-in-out 1s;
+        }
+    }
+    margin-left: 25vw;
+    
+
+
+}

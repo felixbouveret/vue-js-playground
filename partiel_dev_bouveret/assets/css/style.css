@@ -1,0 +1,158 @@
+/* RESETS */
+* { box-sizing: border-box}
+html, body {
+    padding: 0;
+    margin: 0;  
+}
+ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, p {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+a:hover {
+    color: #eb5d5b;
+}
+
+/* COMMON */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* MAIN */
+header {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+.header_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    padding: 0 .5em;
+}
+.logo h1 {
+    letter-spacing: .35em;
+}
+
+.client ul {
+    display: flex;
+}
+.client ul li {
+    padding: 5px;
+}
+.hide {
+    background: red;
+}
+.menu {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: .5em;
+}
+.menu dt {
+    text-transform: uppercase;
+    margin-top: 1em
+}
+.info {
+    text-transform: uppercase;
+}
+.info li {
+    padding-top: .5em;
+}
+
+
+
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+
+.scrapbook {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.scrapbook .inner {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.scrap__block {
+    width: 32%;
+    padding-top: 32%;
+    position: relative;
+    background-size: cover;
+    margin: .5%;
+}
+
+.scrap__block div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+    cursor: default;
+}
+.scrap__block div:hover {
+    background-color: rgba(250, 250, 250, 45%);
+    color: #000;
+}
+.scrap__block div span {
+    font-size: 2em;
+}
+
+.block1 { background-image: url(../img/scrap01.jpg)}
+.block2 { background-image: url(../img/scrap02.jpg)}
+.block3 { background-image: url(../img/scrap03.jpg)}
+.block4 { background-image: url(../img/scrap04.jpg)}
+.block5 { background-image: url(../img/scrap05.jpg)}
+.block6 { background-image: url(../img/scrap06.jpg)}
+
+
+
+footer {
+    width: 80%;
+    margin: 30px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer div {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+footer ul li a {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #000; 
+}
+footer li {
+    display: inline-block;
+    margin-right:1em;
+}

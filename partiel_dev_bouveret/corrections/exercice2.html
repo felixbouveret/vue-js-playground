@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>exercice2</title>
+</head>
+
+<body>
+
+    <script>
+        function helloWorld(lang){
+            switch(lang){
+                case "es":
+                return "Hola el mundo";
+                break;
+
+                case "en":
+                return "Hello world";
+                break;
+                
+                case "fr":
+                return "Bonjour le monde";
+                break;
+
+                default:
+                return "Erreur";
+                break
+            }
+        }
+            console.log("FR : " + helloWorld("fr"));
+            console.log("ES : " + helloWorld("es"));
+            console.log("EN : " + helloWorld("en"));
+    </script>
+    
+</body>
+
+</html>

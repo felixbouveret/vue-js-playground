@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>exercice1</title>
+</head>
+
+<body>
+    <form method="post" action="/app/send" name="myForm">
+        ...
+        <input type="submit">
+    </form>
+    <script>
+        // avant : var form = document.querySelector('#myForm');
+        var form = document.querySelector('myForm');
+        // l'id myForm n'existe pas 
+
+        // avant : form.addEventListener('onsubmit', onSubmit);
+        form.addEventListener('submit', onSubmit);
+        // "onsubmit" n'existe pas 
+
+        function onSubmit() {
+            // do check #myForm fields ...
+        };
+    </script>
+</body>
+
+</html>

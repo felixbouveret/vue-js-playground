@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Pendu</title>
+</head>
+
+<body>
+    <section class="init_word">
+        <h1>Le pendu mieux</h1>
+        <form action="">
+            <label for="word">Votre mot :</label>
+            <input id="word" type="text">
+            <button id="input_button">OK</button>
+        </form>
+    </section>
+    <section class="playing">
+        <div class="pendu_bloc">
+            <img src="assets/img/Frame11.svg" alt="" class="pendu_img">
+        </div>
+
+        <div class="answers">
+            <div class="letters">
+
+            </div>
+            <div class="word">
+
+            </div>
+        </div>
+
+        <div class="guesses">
+            <form action="">
+                <label for="try">Votre lettre :</label>
+                <input type="text" maxlength="1" id="try">
+                <button id="verify_button">OK</button>
+            </form>
+        </div>
+    </section>
+    <section class="win">
+        <h2>Tu as gagné</h2>
+        <span>Rejouer</span>
+    </section>
+    <section class="lost">
+        <h2>Tu as perdu</h2>
+        <span>Rejouer</span>
+    </section>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
