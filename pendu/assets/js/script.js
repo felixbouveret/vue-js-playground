@@ -15,6 +15,9 @@ var guessWordLetters = document.querySelector(".word");
 
 var inputAnswer = document.getElementById("try");
 var inputAnswerButton = document.getElementById("verify_button");
+var inputAnswerWord = document.getElementById("try_word");
+var inputAnswerWordButton = document.getElementById("verify_button_word");
+
 var winPoint = 0;
 var loosePoint = 11;
 
@@ -62,39 +65,69 @@ function initPendu(wordToGuess) {
     for (var i = 0; i < wordLetters.length; i++) {
         guessWordLetters.insertAdjacentHTML("afterbegin", "<span class='letter'>_</span>");
     };
+    startGame(wordToGuess, wordLetters);
+
 };
 
-//probleme de comptage des erreures et des bonnes réponses. Si "EEAAEE" et que "E" alors 4 bonnes réponses (4*winPoint++) et 2 erreures (2*loosePoint--) et peut etre repeté x fois
+function startGame(wordToGuess,wordLetters) {
+    var inputTable = [];
+    var letterList = document.querySelectorAll(".letter");
 
-inputAnswerButton.addEventListener("click", function () {
-    if (inputAnswer.value === "") {
-        inputAnswer.style.borderColor = "red";
-    } else {
-        var wordToGuess = getCookie("wordToGuess");
-        var wordLetters = wordToGuess.split("");
-        inputLetter = inputAnswer.value;
-        lettersSubmitted.insertAdjacentHTML("afterbegin", "<span class='letterTried'>" + inputLetter + "</span>");
+    inputAnswerButton.addEventListener("click", function () {
+        if (inputAnswer.value === "") {
+            inputAnswer.style.borderColor = "red";
+        } else {
+            var verify = false;
+            inputLetter = inputAnswer.value;
 
-        for (var i = 0; i < wordLetters.length; i++) {
-
-            if (wordLetters[i] == inputLetter) {
-                var letterList = document.querySelectorAll(".letter");
-                letterList[i].innerHTML = inputLetter;
-                winPoint++;
-                if (wordLetters.length == winPoint) {
-                    winPage.style.display = "block";
-                };
-            }else{
-                console.log(loosePoint)
-                loosePoint--;
-                pendu.src = "assets/img/Frame" + loosePoint + ".svg";
-                if(loosePoint==1) {
-                    lostPage.style.display = "block";
+            lettersSubmitted.insertAdjacentHTML("afterbegin", "<span class='letterTried'>" + inputLetter + "</span>");
+            
+            for(var i = 0; i<=inputTable.length; i++) {
+                if(inputTable[i]!=inputLetter) {
+                    inputTable.push(inputLetter);
+                    console.log("ajouté");
+                    console.log(inputTable);
+                    for (var i = 0; i < wordLetters.length; i++) {
+                        if (wordLetters[i] == inputLetter) {
+                            letterList[i].innerHTML = inputLetter;
+                            winPoint++;
+                            verify=true;
+                            if (wordLetters.length == winPoint) {
+                                winPage.style.display = "block";
+                            };
+                        }
+                    };
+                    break
+                }else {
+                    console.log("déjà");
+                    console.log(inputTable);
+                    break
                 }
-            };
+            }
+
+            if(!verify){
+                console.log(loosePoint)
+                    loosePoint--;
+                    pendu.src = "assets/img/Frame" + loosePoint + ".svg";
+                    if (loosePoint == 1) {
+                        lostPage.style.display = "block";
+                    }
+            }
         };
-    };
-});
+    });
+    inputAnswerWordButton.addEventListener("click", function(){
+        if (inputAnswerWord.value===""){
+            inputAnswerWord.style.borderColor="red";
+        } else {
+            if(inputAnswerWord.value===wordToGuess) {
+                winPage.style.display = "block";
+                for(var i = 0; i<wordLetters.length; i++) {
+                    letterList[i].innerHTML = wordLetters[i];
+                }
+            }
+        }
+    })
+}
 
 winButton.addEventListener("click", function () {
     location.reload();
