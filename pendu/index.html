@@ -12,11 +12,9 @@
 <body>
     <section class="init_word">
         <h1>Le pendu mieux</h1>
-        <form action="">
-            <label for="word">Votre mot :</label>
-            <input id="word" type="text">
-            <button id="input_button">OK</button>
-        </form>
+        <label for="word">Votre mot :</label>
+        <input id="word" type="text">
+        <button id="input_button">OK</button>
     </section>
     <section class="playing">
         <div class="pendu_bloc">
@@ -25,7 +23,7 @@
 
         <div class="answers">
             <div class="letters">
-
+                
             </div>
             <div class="word">
 
@@ -33,11 +31,12 @@
         </div>
 
         <div class="guesses">
-            <form action="">
-                <label for="try">Votre lettre :</label>
-                <input type="text" maxlength="1" id="try">
-                <button id="verify_button">OK</button>
-            </form>
+            <label for="try">Votre lettre :</label>
+            <input type="text" maxlength="1" id="try">
+            <button id="verify_button">OK</button>
+            <label for="try_word">Votre mot :</label>
+            <input type="text" id="try_word">
+            <button>OK</button>
         </div>
     </section>
     <section class="win">
