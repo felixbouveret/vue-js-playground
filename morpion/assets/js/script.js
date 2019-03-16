@@ -85,12 +85,14 @@ function slt(i) {
         player = !player;
         if (player) {
             block[i].style.backgroundImage = "url(assets/img/cross.svg)"
+            block[i].style.pointerEvents= "none";
             block[i].checked = true;
             block[i].played = true;
             stuckStatut++;
             playerWin.innerHTML = "Au tour du joueur rond"
         } else {
             block[i].style.backgroundImage = "url(assets/img/circle.svg)"
+            block[i].style.pointerEvents= "none";
             block[i].checked = false;
             block[i].played = true;
             stuckStatut++;
