@@ -1,12 +1,16 @@
 var container = document.querySelector("section");
 var block = document.querySelectorAll(".row");
 var playerWin = document.querySelector(".winner");
+var restartButton = document.querySelector(".restart");
 var player = !player;
 var victoire;
 var stuckStatut = 0;
-var test = document.querySelector("body");
-var bjr;
+var board = document.querySelector(".morpion");
+var stuckPoint;
 
+restartButton.addEventListener("click", function(){
+    location.reload();
+});
 function winTest() {
     //colone gauche
     if (block[0].checked == true && block[1].checked == true && block[2].checked == true || block[0].checked == false && block[1].checked == false && block[2].checked == false) {
@@ -68,46 +72,50 @@ function winTest() {
 
 function victory() {
     if (victoire == true) {
-        test.style.pointerEvents = "none"
+        board.style.pointerEvents = "none";
+        restartButton.style.display="block";
+
         if (player) {
-            playerWin.innerHTML = "croix gagne"
+            playerWin.innerHTML = "The cross wins";
         } else {
-            playerWin.innerHTML = "rond gagne"
+            playerWin.innerHTML = "The circle wins";
         }
-        return true
+        return true;
     } else {
         return false;
     }
 }
 
-function slt(i) {
+function playerClick(i) {
     block[i].addEventListener("click", function () {
         player = !player;
         if (player) {
-            block[i].style.backgroundImage = "url(assets/img/cross.svg)"
+            block[i].innerHTML="<span class='cross'></span>";
+            block[i].style.pointerEvents = "none";
             block[i].checked = true;
             block[i].played = true;
             stuckStatut++;
-            playerWin.innerHTML = "Au tour du joueur rond"
+            playerWin.innerHTML = "Circle's turn"
         } else {
-            block[i].style.backgroundImage = "url(assets/img/circle.svg)"
+            block[i].innerHTML="<span class='circle'></span>";
+            block[i].style.pointerEvents = "none";
             block[i].checked = false;
             block[i].played = true;
             stuckStatut++;
-            playerWin.innerHTML = "Au tour du joueur croix"
+            playerWin.innerHTML = "Cross's turn";
         }
         winTest()
         victory(player)
-        bjr = victory();
-        if (bjr == false && stuckStatut == 9) {
-            test.style.pointerEvents = "none"
+        stuckPoint = victory();
+        if (stuckPoint == false && stuckStatut == 9) {
+            board.style.pointerEvents = "none"
             container.style.border = "red solid 1px";
+            playerWin.innerHTML = "No more move";
+            restartButton.style.display="block";
         }
-
-
     })
 }
 for (var i = 0; i < block.length; i++) {
-    slt(i);
+    playerClick(i);
 }
 
