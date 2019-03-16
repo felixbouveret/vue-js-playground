@@ -1,0 +1,40 @@
+*{box-sizing: border-box;}
+html, body {
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 10px 0;
+}
+.puissance {
+  background-color: blue;
+  display: inline-flex;
+  margin:auto;
+  padding:5px 10px;
+  position: relative;
+}
+.puissance::after,.puissance::before {
+  content:"";
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  background-color: blue;
+  bottom:0;
+  left: 0;
+  transform: translate(0,100%);
+}
+.puissance::after {
+  background-color: white;
+  width: 90%;
+  transform: translate(-50%,100%);
+  bottom: -10px;
+  left: 50%;
+  border-radius: 50px 50px 0 0;
+}
+
+.puissance_block {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 100%;
+  margin: 5px;
+}
