@@ -111,6 +111,33 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.arrow__link {
+    position: relative;
+    padding-right: 18px;
+    transition: .5s ease;
+}
+.arrow__link:after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    background-position: center center; 
+    right: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    transition: .3s ease;
+
+}
+
+.arrow__link:hover {
+    text-decoration: none;
+}
+
+.arrow__link:hover:after {
+    right: -5px;
+}
 
 /* BUTTONS */
 
@@ -213,9 +240,13 @@ a:hover {
     flex-direction: column;
     align-items: center;
 }
-.faq .labels, .faq__link {
+.faq .labels, .faq .arrow__link {
     color: var(--faq-color);
 }
+.faq .arrow__link::after {
+    background-image: url(images/arrow.svg);
+}
+
 .faq__list {
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -359,6 +390,24 @@ header .inner{
     bottom: 0;
     left: 50%;
     background: #EBEFF8;
+}
+
+/* events */
+
+.events .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.event_list--mini {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.events .arrow__link {
+    color: var(--main-color); 
+}
+.events .arrow__link::after {
+    background-image: url(images/arrow--orange.svg);
 }
 
 /* benefit */
