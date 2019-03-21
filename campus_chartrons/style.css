@@ -70,6 +70,24 @@ ul,li {
     max-width: 1200px;
 }
 
+section {
+    padding: 80px 0;
+}
+
+.--separator {
+    position: relative;
+}
+.--separator::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    transform: translateX(-50%);
+    bottom: 0;
+    left: 50%;
+    background: #EBEFF8;
+}
+
 /* headings */
 h1, h2, h3, .labels {
     font-family: 'Vollkorn', serif;
@@ -81,10 +99,12 @@ h1 {
 h2 {
     font-size: 40px;
     margin:0 0 16px;
+    
 }
 h3 {
     font-size: 20px;
 }
+h4 {margin: 0;}
 h4.subtitle {
     font-size: 18px;
     margin: 0 0 8px;
@@ -272,7 +292,10 @@ a:hover {
 
 
 /* HEADER */
-
+header {
+    position: absolute;
+    width: 100%;
+}
 header .inner{
     display: flex;
     justify-content: space-between;
@@ -352,7 +375,7 @@ header .inner{
 /* HOME PAGE */
 
 /* hero */
-.hero {
+#home .hero {
     width: 100%;
     height: 630px;
     background: #FEF4DF;
@@ -360,7 +383,7 @@ header .inner{
 
 /* presentation */
 .presentation {
-    padding: 90px 10%;
+    padding: 80px 10%;
     margin: auto;
     position: relative;
 }
@@ -380,36 +403,67 @@ header .inner{
     height: 560px;
     background: var(--main-color-opacity);
 }
-.presentation::after {
-    content: "";
-    position: absolute;
-    width: 80%;
-    height: 1px;
-    transform: translateX(-50%);
-    bottom: 0;
-    left: 50%;
-    background: #EBEFF8;
-}
+
 
 /* events */
 
+.events {
+    /* padding: 80px 0; */
+}
 .events .inner {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.events h2 {
+    max-width: 670px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
 .event_list--mini {
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    grid-gap: 11%;
+    margin-bottom: 80px;
+}
+
+.event__item {
+    display: flex;
+    
+}
+.event_list--mini .event_date {
+    margin-right: 40px;
 }
 .event_date {
     max-width: 95px;
-    max-height: 100px;
     width: 100%;
-    height: 100%;
+    height: 105px;
     box-shadow: 0px 1.57143px 11px rgba(196, 196, 196, 0.3);
     border-radius: 8px;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+    background: #fff;
 }
+.event_date .month {
+    background-color:#F64A4A ; 
+    color: #fff;
+    padding: 8px 0;
+    text-transform: uppercase;
+}
+.event_date .day {
+    flex: 1;
+    font-size: 54px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0px 1.57143px 11px rgba(196, 196, 196, 0.3);
+    background: #fff;
+
+}
+
+
 .events .arrow__link {
     color: var(--main-color); 
 }
@@ -419,7 +473,7 @@ header .inner{
 
 /* benefit */
 .benefit {
-    padding: 90px 0;
+    /* padding: 90px 0; */
 }
 .benefit .inner {
     display: flex;
@@ -437,8 +491,70 @@ header .inner{
 
 
 
+/* DEALS */
+#deals .hero {
+    width: 100%;
+    height: 360px;
+    background: url(images/deals.png) center center;
+}
+#deals .menu  .menu-item a {
+    color: #fff;
+}
+
+/* search bar */
+.search_bar {
+    max-width: 615px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.07);;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 /*FOOTER*/
 
 footer {
     width: 100%;
+}
+.footer__list {
+    background: #FCFCFC;    
+    padding: 60px 0 100px
+}
+.footer__list .inner {
+    display: flex;
+    justify-content: flex-end;
+}
+.footer__item {
+    margin-right: 95px;
+}
+.footer__item:last-child {
+    margin: 0;
+}
+.footer__item h4 {
+    margin-bottom: 16px;
+    font-family: 'Vollkorn', serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+.footer__item li {
+    margin-bottom: 10px;
+}
+.footer__item li a{
+    color: #5A5A5A;
+    font-size: 16px;
+    line-height: 23px;
+}
+.footer__bottom .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+.footer__bottom p {
+    margin: 0;
+    color: #5A5A5A;
+    font-size: 16px;
+    line-height: 23px;
 }
