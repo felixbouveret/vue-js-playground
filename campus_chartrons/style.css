@@ -1,7 +1,7 @@
 /*
 Thème name: Campus Chartrons
 Author: Félix
-Description: qzd qz
+Description: none
 Version: 0.0.1
 Tags: none
 */
@@ -282,7 +282,6 @@ header .inner{
 
 .menu {
     display: flex;
-    position: relative;
     font-weight: 300;
 }
 
@@ -402,6 +401,14 @@ header .inner{
 .event_list--mini {
     display: grid;
     grid-template-columns: repeat(2,1fr);
+}
+.event_date {
+    max-width: 95px;
+    max-height: 100px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 1.57143px 11px rgba(196, 196, 196, 0.3);
+    border-radius: 8px;
 }
 .events .arrow__link {
     color: var(--main-color); 
