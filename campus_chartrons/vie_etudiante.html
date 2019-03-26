@@ -53,14 +53,26 @@
         </section>
         <div class="search_bar">
             <button class="btn"></button>
-            <input placeholder="Que recherchez-vous ?" type="text">
-            <select>
-                <option value="">Toutes les catégories</option>
-                <option value="loisir_sport">Loisirs - Sport</option>
-                <option value="hebergement">Hébergement</option>
-                <option value="restauration">Restauration</option>
-                <option value="service">Service</option>
-            </select>
+            <input class="bar" placeholder="Que recherchez-vous ?" type="text">
+            <div class="filters">
+                <div class="filters__title">
+                    Toutes catégories
+                </div>
+                <div class="filter_list">
+                    <div class="filter__item">
+                        <input type="checkbox">
+                        <span class="filter__title">Culture - Patrimoine</span>
+                    </div>
+                    <div class="filter__item">
+                        <input type="checkbox">
+                        <span class="filter__title">Loisirs - Sports</span>
+                    </div>
+                    <div class="filter__item">
+                        <input type="checkbox">
+                        <span class="filter__title">Service</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <footer>

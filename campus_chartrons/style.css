@@ -638,7 +638,7 @@ header .btn:hover {
     padding: 0 0 0 16px;
     transform: translateY(-50%);
 }
-.search_bar input {
+.search_bar .bar {
     flex: 1;
     height: 100%;
     border: none;
@@ -646,6 +646,49 @@ header .btn:hover {
     padding-left: 8px;
     font-size: 16px;
     color: #9E9E9E;
+}
+.filters {
+    position: relative;
+    color: #9E9E9E;
+    align-self: flex-start;
+
+}
+.filters:hover .filters__title{
+    border-bottom: solid 1px #E5E5E5;
+}
+.filters:hover .filter_list {
+    opacity: 1;
+    pointer-events: all;
+}
+.filters__title {
+    padding: 0 32px 0 16px;
+    line-height: 60px;
+    position: relative;
+    background: #fff;
+    border-radius: 0 8px 8px 0;
+}
+.filters__title::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: url(images/arrow_down.svg)center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 20px;
+}
+.filter_list {
+    opacity: 0;
+    pointer-events: none;
+    padding: 12px 0;
+    background: #fff;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.07);
+    border-radius: 0 0 8px 8px;
+}
+.filter__item {
+    padding: 4px 16px;
 }
 .search_bar select {
     border: none;
