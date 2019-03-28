@@ -6,187 +6,11 @@ Version: 0.0.1
 Tags: none
 */
 
+@import url("variables.css");
+@import url("fonts.css");
+@import url("deal_single.css");
 
 
-/* FONTS */
-
-@import url('https://fonts.googleapis.com/css?family=Vollkorn');
-@font-face {
-    font-family: "SF-Pro-Text";
-    src: url("font/SF-Pro-Text-Light.otf");
-    font-weight: 300;
-}
-@font-face {
-    font-family: "SF-Pro-Text";
-    src: url("font/SF-Pro-Text-LightItalic.otf");
-    font-weight: 300;
-    font-style: italic;
-}
-@font-face {
-    font-family: "SF-Pro-Text";
-    src: url("font/SF-Pro-Text-Regular.otf");
-    font-weight: 400;
-}
-@font-face {
-    font-family: "SF-Pro-Text";
-    src: url("font/SF-Pro-Text-RegularItalic.otf");
-    font-weight: 400;
-    font-style: italic;
-}
-
-
-
-/* VARIABLES */
-
-:root {
-    --main-color : #F38010;
-    --main-color-opacity : #FEF2E7;
-    --faq-color : #00A878;
-    --faq-color-opacity : #F2FBF8;
-    --text-color: #5A5A5A;
-    --white: #fff;
-    --btn-hover: #DF6C0A;
-}
-
-
-
-/* COMMONS */
-
-*{box-sizing: border-box;}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: "SF-Pro-Text", sans-serif;
-    font-size: 16px;
-    overflow-x: hidden;
-}
-ul,li {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-.inner {
-    width: 95%;
-    margin: auto;
-    max-width: 1200px;
-}
-
-section {
-    padding: 80px 0;
-}
-
-.--separator {
-    position: relative;
-}
-.--separator::after {
-    content: "";
-    position: absolute;
-    width: 80%;
-    height: 1px;
-    transform: translateX(-50%);
-    bottom: 0;
-    left: 50%;
-    background: #EBEFF8;
-}
-
-/* headings */
-h1, h2, h3, .labels {
-    font-family: 'Vollkorn', serif;
-    font-weight: 400;
-}
-h1 {
-    font-size: 48px;
-}
-h2 {
-    font-size: 40px;
-    margin:0 0 16px;
-    
-}
-h3 {
-    font-size: 20px;
-}
-h4 {margin: 0;}
-h4.subtitle {
-    font-size: 18px;
-    margin: 0 0 8px;
-}
-.labels {
-    color: var(--main-color);
-    font-size: 24px;
-    margin-bottom: 10px;
-    display: block;
-    font-weight: 400;
-} 
-
-/* content */
-p {
-    margin: 0 0 24px;
-    color: var(--text-color);
-    line-height: 28px;
-}
-
-/* links */
-a {
-    /* color: var(--link-color); */
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-.arrow__link {
-    position: relative;
-    padding-right: 18px;
-    transition: .5s ease;
-}
-.arrow__link:after {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 8px;
-    background-repeat: no-repeat;
-    background-size: contain; 
-    background-position: center center; 
-    right: 0;
-    transform: translateY(-50%);
-    top: 50%;
-    transition: .3s ease;
-
-}
-
-.arrow__link:hover {
-    text-decoration: none;
-}
-
-.arrow__link:hover:after {
-    right: -5px;
-}
-
-/* BUTTONS */
-
-.btn {
-    display: inline-block;
-    line-height: 60px;
-    background: var(--main-color-opacity);
-    color: var(--main-color);
-    padding: 0 16px;
-    font-size: 18px;
-    border-radius: 4px;
-    transition: .5s ease;
-    font-weight: 400;
-}
-.btn:hover {
-    color: #fff;
-    background: var(--main-color);
-    text-decoration: none;
-}
-.btn--faq {
-    color: #fff;
-    background: var(--faq-color);
-}
-.btn--faq:hover {
-    background: #009167;
-}
 
 /* BACKGROUND IMAGE */
 
@@ -196,18 +20,17 @@ a:hover {
 .--background_img .menu .sub-active a:after {
     background-image: url(images/arrow_down--white.svg);
 }
-.--background_img .btn {
+.--background_img .menu .btn {
     background: var(--main-color);
     border: 0;
     color: #fff;
 }
-.--background_img .btn:hover {
+.--background_img .menu .btn:hover {
     background: var(--btn-hover);
 }
 .--background_img .hero {
     width: 100%;
     height: 360px;
-    background: url(images/deals.png) center center;
     background-size: cover;
 }
 
@@ -255,6 +78,11 @@ a:hover {
     margin-bottom: 0;
 }
 
+.formated_list--3_col {
+    grid-template-columns: repeat(3,1fr);
+    max-width: 900px;
+    margin: auto;
+}
 
 /* tags */
 .tag_list {
@@ -538,6 +366,19 @@ header .btn:hover {
     font-size: 12px;
     color: var(--text-color);
 }
+.partners__cta {
+    text-align: center;
+    max-width: 700px;
+    width: 95%;
+    margin: auto auto 130px ;
+}
+.partners__cta h4 {
+    margin-bottom: 24px;
+    font-size: 22px;
+}
+.partners__cta p {
+    margin-bottom: 32px;
+}
 
 
 
@@ -638,6 +479,24 @@ header .btn:hover {
     padding: 0 0 0 16px;
     transform: translateY(-50%);
 }
+.search_bar .btn {
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    line-height: 0;
+}
+.search_bar .btn svg{
+    fill: var(--main-color);
+    display: block;
+}
+.search_bar .btn svg path{ 
+    transform: translate(11%, 4%);
+}
+
+.search_bar .btn:hover svg {
+    fill: var(--main-color-opacity);
+}
+
 .search_bar .bar {
     flex: 1;
     height: 100%;
@@ -698,6 +557,16 @@ header .btn:hover {
     padding: 0 16px;
     font-size: 16px;
 
+}
+
+
+.good_deals--resume h2 {
+    margin-bottom: 70px;
+}
+.good_deals .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 

@@ -1,0 +1,33 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
+
+
+@font-face {
+    font-family: "SF-Pro-Text";
+    src: url("font/SF-Pro-Text-Light.otf");
+    font-weight: 300;
+}
+
+
+@font-face {
+    font-family: "SF-Pro-Text";
+    src: url("font/SF-Pro-Text-LightItalic.otf");
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: "SF-Pro-Text";
+    src: url("font/SF-Pro-Text-Regular.otf");
+    font-weight: 400;
+}
+
+
+@font-face {
+    font-family: "SF-Pro-Text";
+    src: url("font/SF-Pro-Text-RegularItalic.otf");
+    font-weight: 400;
+    font-style: italic;
+}
