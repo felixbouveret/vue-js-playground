@@ -36,3 +36,16 @@
 .single__contact .phone a, .single__contact .open, .single__contact .website a {
     color: var(--text-color);
 }
+
+
+.single__content h3{
+    font-size: 20px;
+}
+.single__content p, .single__content li {
+    font-size: 16px;
+    line-height: 25px;
+    color: var(--text-color);
+}
+.single__content li::before {
+    list-style-type: disc;
+}
