@@ -170,4 +170,5 @@ a:hover {
 
 .--background_img .hero.hero--large {
     height: 460px;
+    position: absolute;
 }

@@ -1,6 +1,10 @@
 .deal_single {
     position: relative;
-    top: -425px;
+    padding-top: 136px;
+}
+.deal_single h2, .deal_single h3, .deal_single h1 {
+    font-family: "SF-Pro-Text", sans-serif;
+
 }
 
 .deal_single .inner {
@@ -10,6 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #fff;
 }
 
 .single__white {
@@ -24,8 +29,12 @@
     justify-content: center;
     flex-wrap: wrap;
 }
+.deal_single .single__title {
+    font-size: 18px;
+}
 .single__contact h2 {
     width: 100%;
+    font-size: 22px;
 }
 .single__contact .phone {
     margin-right: 68px;
@@ -36,8 +45,36 @@
 .single__contact .phone a, .single__contact .open, .single__contact .website a {
     color: var(--text-color);
 }
+.single__contact .phone, .single__contact .open, .single__contact .website {
+    position: relative;
+    padding-left: 20px;
+}
+.single__contact .phone::before, .single__contact .open::before, .single__contact .website::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    transform: translateY(-50%);
+    top: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+.single__contact .phone::before {
+    background-image: url(images/phone__single.svg);
+}
+.single__contact .open::before{
+    background-image: url(images/hour__single.svg);
+}
+.single__contact .website::before{
+    background-image: url(images/website__single.svg);  
+}
 
-
+.single__content {
+    padding-bottom: 40px;
+    margin-bottom: 24px;
+}
 .single__content h3{
     font-size: 20px;
 }
@@ -46,6 +83,37 @@
     line-height: 25px;
     color: var(--text-color);
 }
+.single__content li {
+    padding-left: 30px;
+    position: relative;
+}
 .single__content li::before {
-    list-style-type: disc;
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--main-color);  
+    left: 10px;
+    transform: translateY(-50%);
+    top: 50%;
+    border-radius: 50%;
+}
+.single__content .image {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.single__content .image img {
+    flex: 1;
+    min-width: 31%;
+    object-fit: contain;
+    margin: 0 1%;
+}
+
+.single__footer {
+    display: flex;
+    align-items: center;
+}
+.single__footer span{
+    margin-right: 16px;
 }
