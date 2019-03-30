@@ -1,0 +1,12 @@
+
+.events .list--3col .event_date{
+    position: absolute;
+    transform: translate(0%,calc(-100% - 16px) )
+}
+.events .list--3col .formated__item__desc {
+    padding-top: 36px;
+}
+.events .list--3col .formated__date {
+    margin-bottom: 16px;
+    font-size: 14px;
+}
