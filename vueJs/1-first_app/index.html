@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <div id="app-2">
+        <span v-bind:title="message">
+            Passez votre souris sur moi pendant quelques secondes
+            pour voir mon titre lié dynamiquement !
+        </span>
+    </div>
+
+    <div id="app-3">
+        <p v-if="seen">Maintenant vous me voyez !</p>
+    </div>
+
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Message retourné</button>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue !'
+            }
+        });
+        var app2 = new Vue({
+            el: "#app-2",
+            data: {
+                message: 'Vous avez affiché cette page le ' + new Date().toLocaleString()
+            }
+        })
+        var app3 = new Vue({
+            el: "#app-3",
+            data: {
+                seen: true
+            }
+        })
+        var app4 = new Vue({
+            el: "#app-4",
+            data: {
+                todos: [
+                    { text: "Apprendre JavaScript" },
+                    { text: "Apprendre VueJs" },
+                    { text: "Apprendre PHP 7.0" }
+                ]
+            }
+        })
+        var app5 = new Vue({
+            el: '#app-5',
+            data: {
+                message: 'Hello Vue.js !'
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split('').reverse().join('');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

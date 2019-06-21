@@ -1,35 +1,29 @@
-let device = document.querySelector(".mobile_container");
-let deviceContainer = document.querySelector(".view").offsetTop;
-let deviceMiddle = device.offsetTop + deviceContainer + 250;
-let deviceContent = document.querySelectorAll(".view_content");
-
 let article = document.querySelectorAll(".article_container");
 
-function resizeEvent() {
-    let height = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
-    return height
-};
+let phoneContainer = document.querySelector(".view");
+let phone = document.querySelector(".mobile_container");
+let phoneContent = document.querySelectorAll(".view_content");
 
 
+
+// function resizeEvent() {
+//     let height = window.innerHeight
+//         || document.documentElement.clientHeight
+//         || document.body.clientHeight;
+//     return height
+// };
 
 function onScrollEvent() {
-    let topPage = window.pageYOffset;
-    if (deviceMiddle <= topPage + resizeEvent() / 2) {
-        device.classList.add("mobile_container-fixed");
-    } else {
-        device.classList.remove("mobile_container-fixed");
-    }
-    for (let i = 0; i < article.length; i++) {
-        let articleActiveTop = article[i].offsetTop;
-        if (articleActiveTop <= deviceMiddle + topPage - 100) {
-            deviceContent[i].classList.add("view_content-visible")
-        } else {
-            deviceContent[i].classList.remove("view_content-visible")
+let topPage = window.scrollY;
 
-        }
-    }
+    console.log(phoneContainer.offsetTop)
+    console.log(topPage)
+    if(phoneContainer.offsetTop <= topPage) {
+        phoneContainer.style.position = "fixed";
+    }else{
+        phoneContainer.style.position = "initial";
+
+    } 
 }
 window.onscroll = onScrollEvent;
 window.onresize = resizeEvent;

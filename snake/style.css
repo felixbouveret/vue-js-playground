@@ -1,0 +1,91 @@
+*{box-sizing: border-box;}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+.snake_row {
+  display: flex;
+}
+.snake_container {
+  display: flex;
+  flex-direction: column;
+  width: calc(25*24px);
+  flex-wrap: wrap;
+  border: 3px black solid;
+  padding: 5px;
+  box-sizing: initial;
+}
+.snake_block {
+  background: black;
+  width: 24px;
+  height: 24px;
+  border: solid #fff 1px; 
+  color: white;
+}
+.btn {
+  display: block;
+  text-transform: uppercase;
+  background: white;
+  border: solid #000 3px;
+  padding: 10px;
+  width: 200px;
+  font-weight: bold;
+  letter-spacing: 1em;
+  transition: .5s ease;
+  cursor: pointer;
+}
+.btn:hover {
+  background: black;
+  color: white;
+}
+.board_control {
+  flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  align-items: center;
+    height: 100%;
+}
+.points {
+  width: 200px;
+  font-size: 2em;
+  text-align: center;
+  border: solid #000 3px;
+}
+.interval_container {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.interval_container span {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  letter-spacing: 1em;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: .5s ease;
+}
+.interval {
+  border: solid #000 3px;
+  padding: 40px 10px 10px;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  width: 200px;
+  transition: .5s ease;
+}
+.interval:focus {
+  outline: 0;
+  background-color: #000;
+  color: #fff;
+}

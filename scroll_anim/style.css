@@ -23,7 +23,7 @@ h1 {
   width: 50%;
 }
 .article {
-  height: 750px;
+  height: 100vh;
   display: flex;
   align-items: center;
 }
@@ -36,7 +36,7 @@ h1 {
 }
 
 .view {
-  height: 750px;
+  height: 100vh;
   position: relative;
   display: flex;
   align-items: center;

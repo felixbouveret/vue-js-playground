@@ -1,0 +1,28 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+section {
+    height: 100vh;
+    position: relative;
+}
+#suite {
+    background-color: #000;
+}
+.inner {
+    max-width: 1300px;
+    width: 95%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    margin: auto;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+h1, p {
+    width: 60%;
+    text-align: center;
+}
