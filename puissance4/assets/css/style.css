@@ -37,4 +37,10 @@ html, body {
   background-color: white;
   border-radius: 100%;
   margin: 5px;
+  line-height:50px;
+  
+/*  Delete after  */
+  font-family: arial;
+  font-weight: bold;
+  font-size: 2em
 }
