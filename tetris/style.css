@@ -1,0 +1,31 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+* {
+  box-sizing: border-box;
+}
+.shape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+.shape_row {
+  height: 32%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  border: solid .5px red;
+}
+.shape_block {
+  width: 32%;
+  background-color: #CECECE;
+  border-radius: 4px;
+}
+button {
+  margin-top: 1em;
+}

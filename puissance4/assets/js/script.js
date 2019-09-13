@@ -1,5 +1,5 @@
-let puissanceColumns = document.querySelectorAll(".puissance_col");
-let allBlocks = document.querySelectorAll(".puissance_block");
+const puissanceColumns = document.querySelectorAll(".puissance_col");
+const allBlocks = document.querySelectorAll(".puissance_block");
 let grid = [];
 let diagoGrid = [];
 
@@ -29,14 +29,14 @@ for (let i = 0; i < puissanceColumns.length; i++) {
 
   getAllRows = grid.push(slt);
   
-  // setNewGrid = newGrid.push(slt);
+  setNewGrid = newGrid.push(slt);
 
   // setNewGrid = newGrid.reverse();
 
-  // for (let i = 0; i < setNewGrid.length; i++) {
-  //   setNewGrid[i].reverse();
-  // }
-  // console.log(grid);
+  for (let i = 0; i < setNewGrid.length; i++) {
+    setNewGrid[i].reverse();
+  }
+  console.log(grid);
 
 
 
@@ -110,6 +110,7 @@ function isItWon(col, row) {
         winCondition++;
         if (winCondition === 4) {
           console.log("COLLUMN WIN");
+          break;
         }
       } else {
         winCondition = 0;
@@ -123,6 +124,7 @@ function isItWon(col, row) {
       winCondition++;
       if (winCondition === 4) {
         console.log("ROW WIN");
+        break;
       }
     }
     else {
@@ -139,7 +141,7 @@ function isItWon(col, row) {
           winCondition++;
           if (winCondition === 4) {
             console.log("DIAGO WIN");
-
+            break;
           }
         }
         else {
