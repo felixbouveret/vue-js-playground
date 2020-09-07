@@ -60,16 +60,16 @@ const simonTurn = () => {
 };
 
 const turnOffBlocks = () => {
-  for (let i = 0; i < SIMON_BLOCKS.length; i++) {
-    const element = SIMON_BLOCKS[i];
-    element.classList.remove("simon-block--keyd-down");
+  for (let blockIndex = 0; blockIndex < SIMON_BLOCKS.length; blockIndex++) {
+    const block = SIMON_BLOCKS[blockIndex];
+    block.classList.remove("simon-block--keyd-down");
   }
 };
 
 const checkPlayerMoves = () => {
   for (let i = 0; i < PLAYER_PATH.length; i++) {
-    const element = PLAYER_PATH[i];
-    if (element !== SIMON_PATH[i] || PLAYER_PATH.length > SIMON_PATH.length) {
+    const move = PLAYER_PATH[i];
+    if (move !== SIMON_PATH[i] || PLAYER_PATH.length > SIMON_PATH.length) {
       return false;
     }
   }
@@ -79,6 +79,7 @@ const checkPlayerMoves = () => {
 const stopSimon = () => {
   ERROR_SOUND.load();
   ERROR_SOUND.play();
+
   BODY.classList.add("error");
   setTimeout(() => {
     BODY.classList.remove("error");
@@ -87,8 +88,10 @@ const stopSimon = () => {
   setTimeout(() => {
     turnOffBlocks();
   }, 400);
+
   SIMON_PATH = [];
   PLAYER_PATH = [];
+
   switchButton();
   START_BUTTON.addEventListener("click", startSimon);
 };
@@ -97,28 +100,22 @@ const initSimon = () => {
   SIMON_PATH = [];
   PLAYER_PATH = [];
   if (!launchedOnce) {
-    for (let block = 0; block < SIMON_BLOCKS.length; block++) {
-      const element = SIMON_BLOCKS[block];
+    for (let blockIndex = 0; blockIndex < SIMON_BLOCKS.length; blockIndex++) {
+      const element = SIMON_BLOCKS[blockIndex];
       function elementFunction() {
-        PLAYER_PATH.push(block);
+        PLAYER_PATH.push(blockIndex);
 
-        turnOffBlocks();
+        this.classList.add("simon-block--keyd-down");
 
         setTimeout(() => {
           turnOffBlocks();
         }, 400);
 
-        this.classList.add("simon-block--keyd-down");
-
-        blockSound(block);
+        blockSound(blockIndex);
 
         if (!checkPlayerMoves()) {
           stopSimon();
         } else if (PLAYER_PATH.length === SIMON_PATH.length) {
-          setTimeout(() => {
-            turnOffBlocks();
-          }, 400);
-
           PLAYER_PATH = [];
 
           setTimeout(() => {
