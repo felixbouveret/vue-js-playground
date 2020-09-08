@@ -2,18 +2,24 @@
   <section class="root">
     <div class="inner">
       <h1>Playground</h1>
-      <p>Choose your game</p>
 
       <div class="nav">
-        <ul class="nav-list">
-          <template v-for="(route, routeIndex) in routes">
-            <li v-if="route.path !== '/'" :key="routeIndex" class="nav-block">
-              <router-link :to="route.path" class="nav-link"
-                >{{ route.name }}
-              </router-link>
-            </li>
-          </template>
-        </ul>
+        <template v-for="(route, routeIndex) in routes">
+          <h2 v-if="route.path !== '/'" :key="routeIndex + '-title'">
+            {{ route.name }}
+          </h2>
+          <ul v-if="route.path !== '/'" :key="routeIndex" class="nav-list">
+            <template v-for="(child, childIndex) in route.children">
+              <li v-if="child.path !== ''" :key="childIndex" class="nav-block">
+                <router-link
+                  :to="route.path + '/' + child.path"
+                  class="nav-link"
+                  >{{ child.name }}
+                </router-link>
+              </li>
+            </template>
+          </ul>
+        </template>
       </div>
     </div>
   </section>
