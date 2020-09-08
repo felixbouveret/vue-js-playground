@@ -18,7 +18,12 @@ export default [
       {
         path: "simon",
         name: "Simon",
-        component: () => import("@/pages/Simon"),
+        component: () => import("@/pages/Games/Simon"),
+      },
+      {
+        path: "snake",
+        name: "Snake",
+        component: () => import("@/pages/Games/Snake"),
       },
     ],
   },
@@ -35,7 +40,7 @@ export default [
       {
         path: "switch",
         name: "Switch",
-        component: () => import("@/pages/Switch"),
+        component: () => import("@/pages/Experiments/Switch"),
       },
     ],
   },
