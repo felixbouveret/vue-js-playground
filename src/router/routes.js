@@ -19,11 +19,17 @@ export default [
         path: "simon",
         name: "Simon",
         component: () => import("@/pages/Games/Simon"),
+        meta: {
+          title: "Playground | Simon",
+        },
       },
       {
         path: "snake",
         name: "Snake",
         component: () => import("@/pages/Games/Snake"),
+        meta: {
+          title: "Playground | Snack",
+        },
       },
     ],
   },
@@ -41,6 +47,9 @@ export default [
         path: "switch",
         name: "Switch",
         component: () => import("@/pages/Experiments/Switch"),
+        meta: {
+          title: "Playground | Switch",
+        },
       },
     ],
   },
