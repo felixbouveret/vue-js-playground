@@ -5,13 +5,8 @@
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "App",
-  components: {
-    // HelloWorld,
-  },
 };
 </script>
 
@@ -21,5 +16,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 </style>

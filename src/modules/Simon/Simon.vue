@@ -196,15 +196,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.root {
-  width: 100%;
-  height: 100vh;
-  min-height: 700px;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 .simon {
   display: flex;
   flex-direction: column;
@@ -302,34 +293,6 @@ export default {
   width: 30%;
   height: 30%;
   opacity: 1;
-}
-
-.st-button {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  display: block;
-  border: none;
-  padding: 16px 64px;
-  margin: 84px auto 0;
-  background-color: #29d34e;
-  color: white;
-  font-size: 28px;
-  border-radius: 4px;
-  transition: box-shadow 0.3s;
-  cursor: pointer;
-  outline-width: 0;
-
-  &:hover {
-    box-shadow: 0 0 32px 8px #29d34eb9;
-  }
-
-  &.secondary-button {
-    background-color: #2281f0;
-
-    &:hover {
-      box-shadow: 0 0 32px 8px #2281f0b9;
-    }
-  }
 }
 
 .error {
