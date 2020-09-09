@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pageRoot">
     <h1>Experiments</h1>
   </div>
 </template>

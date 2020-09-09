@@ -1,11 +1,13 @@
 <template>
   <section class="root">
-    <div class="snake_container">
-      <div v-for="i in 15" :key="i" class="snake_row">
-        <div v-for="o in 15" :key="o" class="snake_block" />
+    <div class="inner">
+      <div class="snake_container">
+        <div v-for="i in 15" :key="i" class="snake_row">
+          <div v-for="o in 15" :key="o" class="snake_block" />
+        </div>
       </div>
+      <button class="st-button" @click="initGame">start</button>
     </div>
-    <button class="st-button" @click="initGame">start</button>
   </section>
 </template>
 
@@ -214,16 +216,24 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: calc(15 * 32px);
+  width: calc(15 * 20px);
   flex-wrap: wrap;
   box-sizing: initial;
   background: linear-gradient(45deg, #bf47fd, #002094);
   border-radius: 10px;
   overflow: hidden;
+
+  @media (min-width: 540px) {
+    width: calc(15 * 32px);
+  }
 }
 .snake_block {
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
+  @media (min-width: 540px) {
+    width: 32px;
+    height: 32px;
+  }
 }
 .snake_row:nth-child(2n) .snake_block:nth-child(2n),
 .snake_row:nth-child(2n + 1) .snake_block:nth-child(2n + 1) {

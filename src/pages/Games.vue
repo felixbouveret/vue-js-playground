@@ -1,5 +1,7 @@
 <template>
-  <h1>Games</h1>
+  <div class="pageRoot">
+    <h1>Games</h1>
+  </div>
 </template>
 
 <script>

@@ -196,15 +196,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.root {
-  width: 100%;
-  height: 100vh;
-  min-height: 700px;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 .simon {
   display: flex;
   flex-direction: column;

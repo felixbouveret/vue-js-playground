@@ -39,10 +39,12 @@ export default {
 
 <style lang="scss" scoped>
 .root {
-  min-height: 700px;
-  height: 100vh;
-  display: flex;
-  align-items: center;
+  margin-top: 64px;
+  @media (min-width: 720px) {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
 }
 
 h1 {
@@ -50,18 +52,31 @@ h1 {
   text-shadow: 0 0 11px #8b37e4;
 }
 
-p {
-  color: #afa2a2;
+h2 {
+  margin-bottom: 32px;
 }
 
 .nav {
   width: 100%;
-  margin: 64px 0 64px;
+  max-width: 800px;
+  margin: 64px auto 64px;
 }
 .nav-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 32px;
+  grid-gap: 16px;
+  margin-bottom: 48px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 540px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
+  }
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 32px;
+  }
 }
 
 .nav-link {
