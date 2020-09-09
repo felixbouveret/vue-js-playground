@@ -3,8 +3,14 @@ module.exports = {
   devServer: {
     port: 3000,
   },
-  configureWebpack: {
-    plugins: [],
+  chainWebpack: (config) => {
+    config.module
+      .rule("vue")
+      .use("vue-svg-inline-loader")
+      .loader("vue-svg-inline-loader")
+      .options({
+        /* ... */
+      });
   },
   css: {
     loaderOptions: {
