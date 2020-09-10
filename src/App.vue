@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
+  watch: {
+    $route(to) {
+      document.title = to.meta.title || "Playground";
+    },
+  },
 };
 </script>
 
@@ -18,5 +25,24 @@ export default {
   text-align: center;
   width: 100%;
   height: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  position: relative;
+  top: 0;
+  transition-duration: 0.3s;
+  transition-property: opacity, top;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  position: relative;
+  opacity: 0;
+}
+
+.fade-enter {
+  top: -8px;
 }
 </style>
