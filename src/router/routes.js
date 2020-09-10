@@ -6,12 +6,13 @@ export default [
   },
   {
     path: "/games",
+    name: "Games",
     component: { render: (c) => c("router-view") },
 
     children: [
       {
         path: "",
-        name: "Games",
+        name: "GamesHome",
         component: () => import("@/pages/Games"),
       },
       {
@@ -42,11 +43,12 @@ export default [
   },
   {
     path: "/experiments",
+    name: "Experiments",
     component: { render: (c) => c("router-view") },
     children: [
       {
         path: "",
-        name: "Experiments",
+        name: "ExperimentsHome",
         component: () => import("@/pages/Experiments"),
       },
       {
