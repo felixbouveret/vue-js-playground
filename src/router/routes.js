@@ -31,6 +31,14 @@ export default [
           title: "Playground | Snack",
         },
       },
+      {
+        path: "puissance4",
+        name: "Puissance 4",
+        component: () => import("@/pages/Games/Puissance4"),
+        meta: {
+          title: "Playground | Puissance4",
+        },
+      },
     ],
   },
   {
