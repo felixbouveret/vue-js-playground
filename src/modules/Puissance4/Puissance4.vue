@@ -1,25 +1,39 @@
 <template>
   <section class="root">
-    <div v-if="winningPlayer">
-      {{ winningPlayer === 1 ? "Joueur 1" : "Joueur 2" }}
-    </div>
-    <div class="puissance">
-      <div
-        v-for="(col, colId) in grid"
-        :key="colId"
-        class="puissance_col"
-        @click="addCoin(col, colId)"
-      >
-        <div
-          v-for="(block, blockId) in col.blocks"
-          :key="blockId"
-          class="puissance_block"
-          :class="{
-            activePlayer1: block.player === 1,
-            activePlayer2: block.player === 2,
-          }"
-        />
+    <div class="inner">
+      <div class="playersTurns" :class="{ winner: winningPlayer }">
+        <template v-if="winningPlayer">
+          {{
+            winningPlayer === 2 ? "Second player wins!" : "First player wins!"
+          }}
+        </template>
+        <template v-else>
+          {{
+            currentPlayer === 2 ? "Second player's turn" : "First player's turn"
+          }}
+        </template>
       </div>
+      <div class="puissance">
+        <div
+          v-for="(col, colId) in grid"
+          :key="colId"
+          class="puissance_col"
+          @click="!winningPlayer ? addCoin(col, colId) : null"
+        >
+          <div
+            v-for="(block, blockId) in col.blocks"
+            :key="blockId"
+            class="puissance_block"
+            :class="{
+              activePlayer1: block.player === 1,
+              activePlayer2: block.player === 2,
+            }"
+          />
+        </div>
+      </div>
+      <button v-if="gameRunning" class="st-button" @click="gameButton.function">
+        {{ gameButton.text }}
+      </button>
     </div>
   </section>
 </template>
@@ -107,17 +121,36 @@ export default {
           ],
         },
       ],
-      diagoGrid: [],
+      button: {
+        restart: {
+          text: "Restart",
+          function: () => this.resetGame(),
+        },
+      },
       player: true,
-      winCondition: 0,
-      reversGrid: [],
-      newGrid: [],
       winningPlayer: 0,
+      gameRunning: false,
     };
   },
 
   methods: {
+    resetGame() {
+      this.winningPlayer = 0;
+      this.player = true;
+      for (let col = 0; col < this.grid.length; col++) {
+        const columnObject = this.grid[col];
+        columnObject.activeBlocks = 0;
+        for (let blockId = 0; blockId < columnObject.blocks.length; blockId++) {
+          const block = columnObject.blocks[blockId];
+          block.player = false;
+        }
+      }
+    },
     addCoin(column, colId) {
+      if (!this.gameRunning) {
+        this.gameRunning = true;
+      }
+
       let blockId = this.reversedBlockId(column);
       if (blockId >= 0) {
         column.blocks[blockId].player = this.currentPlayer;
@@ -297,15 +330,28 @@ export default {
     currentPlayer() {
       return this.player ? 1 : 2;
     },
+
+    gameButton() {
+      return this.button.restart;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.playersTurns {
+  font-size: 125%;
+  font-weight: 500;
+  transition: color 0.3s;
+  &.winner {
+    color: white;
+  }
+}
+
 .puissance {
   background: linear-gradient(45deg, #bf47fd, #002094);
   display: inline-flex;
-  margin: auto;
+  margin: 16px auto 0;
   padding: 8px;
   position: relative;
   border-radius: 10px;
@@ -334,23 +380,44 @@ export default {
 }
 
 .puissance_block {
-  width: 50px;
-  height: 50px;
+  width: 32px;
+  height: 32px;
   background-color: #020217;
   border-radius: 100%;
   margin: 5px;
-  line-height: 50px;
+  overflow: hidden;
 
-  /*  Delete after  */
-  font-family: arial;
-  font-weight: bold;
-  font-size: 2em;
-
-  &.activePlayer1 {
-    background-color: red;
+  @media (min-width: 540px) {
+    width: 50px;
+    height: 50px;
   }
-  &.activePlayer2 {
-    background-color: blue;
+
+  &::after {
+    position: relative;
+    top: -8px;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50px;
+
+    background-color: transparent;
+
+    transition-duration: 0.3s;
+    transition-property: background-color, top;
+
+    content: "";
+  }
+
+  &.activePlayer1::after {
+    background-color: #f9e900;
+    top: 0;
+  }
+
+  &.activePlayer2::after {
+    background-color: #00c2d1;
+    top: 0;
   }
 }
 </style>
