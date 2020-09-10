@@ -6,7 +6,6 @@ export default [
   },
   {
     path: "/games",
-    name: "Games",
     component: { render: (c) => c("router-view") },
 
     children: [
@@ -43,7 +42,6 @@ export default [
   },
   {
     path: "/experiments",
-    name: "Experiments",
     component: { render: (c) => c("router-view") },
     children: [
       {
