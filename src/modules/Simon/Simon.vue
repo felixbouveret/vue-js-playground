@@ -142,7 +142,7 @@ export default {
       }, 500);
     },
 
-    blinkBlock(blockIndex, hasSound = true) {
+    blinkBlock(blockIndex, hasSound = false) {
       if (hasSound) {
         this.SIMON_BLOCKS[blockIndex].sound.load();
         this.SIMON_BLOCKS[blockIndex].sound.play();
@@ -155,8 +155,8 @@ export default {
     },
 
     flashError() {
-      this.error.sound.load();
-      this.error.sound.play();
+      // this.error.sound.load();
+      // this.error.sound.play();
 
       this.error.isError = true;
       setTimeout(() => {
@@ -205,27 +205,36 @@ export default {
 .simon-container {
   box-sizing: content-box;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 100px);
   grid-gap: 24px;
   margin: auto;
   max-width: 248px;
   max-height: 248px;
-  width: 70vw;
-  height: 70vw;
   transform: rotate(45deg);
   padding: 32px;
   border-radius: 16px;
   box-shadow: 0 0 20px 4px transparent;
   transition: box-shadow 0.3s, background-color 0.3s;
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(2, 1fr);
+    width: 70vw;
+    height: 70vw;
+  }
 }
 
 .simon-block {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   border-radius: 10px;
-  transition: ease 0.3s;
+  transition: box-shadow 0.3s, background-color 0.3s;
   cursor: pointer;
+
+  @media (min-width: 720px) {
+    width: 100%;
+    height: 100%;
+  }
 
   &:after {
     content: "";

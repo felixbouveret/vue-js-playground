@@ -22,13 +22,19 @@
         </template>
       </div>
     </div>
+    <Footer />
   </section>
 </template>
 
 <script>
 import routes from "@/router/routes";
+import Footer from "@/components/Footer";
 
 export default {
+  components: {
+    Footer,
+  },
+
   data() {
     return {
       routes: routes,
