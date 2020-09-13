@@ -30,10 +30,16 @@
             }"
           />
         </div>
+        <transition name="buttonFade" mode="out-in">
+          <button
+            v-if="gameRunning"
+            class="st-button"
+            @click="gameButton.function"
+          >
+            {{ gameButton.text }}
+          </button>
+        </transition>
       </div>
-      <button v-if="gameRunning" class="st-button" @click="gameButton.function">
-        {{ gameButton.text }}
-      </button>
     </div>
   </section>
 </template>
@@ -419,5 +425,28 @@ export default {
     background-color: #00c2d1;
     top: 0;
   }
+}
+
+.st-button {
+  position: absolute;
+  bottom: -64px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+}
+
+.buttonFade-enter-active,
+.buttonFade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity, bottom;
+  transition-timing-function: ease;
+}
+
+.buttonFade-enter,
+.buttonFade-leave-active {
+  opacity: 0;
+}
+
+.buttonFade-enter {
+  bottom: -72px;
 }
 </style>
