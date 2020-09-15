@@ -1,20 +1,31 @@
 <template>
   <section class="root">
     <div class="inner">
+      <span>{{ points }}</span>
       <div class="snake_container">
         <div v-for="i in 15" :key="i" class="snake_row">
           <div v-for="o in 15" :key="o" class="snake_block" />
         </div>
       </div>
-      <button class="st-button" @click="initGame">start</button>
+      <input type="text" placeholder="Fill in you name" v-model="userName" />
+      <button v-if="userName" class="st-button" @click="initGame">start</button>
+      <scoreBoard />
     </div>
   </section>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import scoreBoard from "./components/scoreBoard";
+
 export default {
+  components: {
+    scoreBoard,
+  },
+
   data() {
     return {
+      userName: null,
       points: 0,
       bodyLength: 0,
       position: {
@@ -32,6 +43,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations("games", ["ADD_SNAKE_SCORE"]),
     initGame() {
       if (!this.isGameRunning) {
         if (this.isFirstGame) {
@@ -98,7 +110,6 @@ export default {
     },
 
     directionKeyX() {
-      console.log("test");
       if (event.keyCode === 38) {
         if (this.direction.x !== 1) {
           this.direction.x = -1;
@@ -173,6 +184,7 @@ export default {
     },
 
     resetGame() {
+      this.ADD_SNAKE_SCORE({ points: this.points, name: this.userName });
       clearInterval(this.intervalFunction);
       this.isGameRunning = false;
 
