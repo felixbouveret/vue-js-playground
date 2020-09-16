@@ -7,15 +7,14 @@
           <div v-for="o in 15" :key="o" class="snake_block" />
         </div>
       </div>
-      <input type="text" placeholder="Fill in you name" v-model="userName" />
-      <button v-if="userName" class="st-button" @click="initGame">start</button>
+      <button class="st-button" @click="initGame">start</button>
       <scoreBoard />
     </div>
   </section>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import scoreBoard from "./components/scoreBoard";
 
 export default {
@@ -25,7 +24,6 @@ export default {
 
   data() {
     return {
-      userName: null,
       points: 0,
       bodyLength: 0,
       position: {
@@ -40,6 +38,22 @@ export default {
       isFirstGame: true,
       isGameRunning: false,
     };
+  },
+
+  computed: {
+    ...mapState("app", ["username"]),
+    snakeBlock() {
+      return document.querySelectorAll(".snake_block");
+    },
+
+    snakeGrid() {
+      let snakeRow = document.querySelectorAll(".snake_row");
+      let snakeGrid = [];
+      for (let i = 0; i < snakeRow.length; i++) {
+        snakeGrid.push(snakeRow[i].querySelectorAll(".snake_block"));
+      }
+      return snakeGrid;
+    },
   },
 
   methods: {
@@ -184,7 +198,7 @@ export default {
     },
 
     resetGame() {
-      this.ADD_SNAKE_SCORE({ points: this.points, name: this.userName });
+      this.ADD_SNAKE_SCORE({ points: this.points, name: this.username });
       clearInterval(this.intervalFunction);
       this.isGameRunning = false;
 
@@ -200,21 +214,6 @@ export default {
       }
 
       this.checkSnakeBlockColor();
-    },
-  },
-
-  computed: {
-    snakeBlock() {
-      return document.querySelectorAll(".snake_block");
-    },
-
-    snakeGrid() {
-      let snakeRow = document.querySelectorAll(".snake_row");
-      let snakeGrid = [];
-      for (let i = 0; i < snakeRow.length; i++) {
-        snakeGrid.push(snakeRow[i].querySelectorAll(".snake_block"));
-      }
-      return snakeGrid;
     },
   },
 };
