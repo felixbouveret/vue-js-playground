@@ -8,20 +8,14 @@
         </div>
       </div>
       <button class="st-button" @click="initGame">start</button>
-      <scoreBoard />
     </div>
   </section>
 </template>
 
 <script>
 import { mapMutations, mapState } from "vuex";
-import scoreBoard from "./components/scoreBoard";
 
 export default {
-  components: {
-    scoreBoard,
-  },
-
   data() {
     return {
       points: 0,
@@ -95,6 +89,7 @@ export default {
           }
         }, 100);
         this.isGameRunning = true;
+        this.$emit("gameStarted", true);
       }
     },
 
@@ -201,6 +196,7 @@ export default {
       this.ADD_SNAKE_SCORE({ points: this.points, name: this.username });
       clearInterval(this.intervalFunction);
       this.isGameRunning = false;
+      this.$emit("gameStarted", false);
 
       this.position.x = 7;
       this.position.y = 7;
