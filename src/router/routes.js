@@ -67,6 +67,14 @@ export default [
           title: "Playground | Palindrome",
         },
       },
+      {
+        path: "svgAnimations",
+        name: "Svg Animations",
+        component: () => import("@/pages/Experiments/SvgAnimations"),
+        meta: {
+          title: "Playground | Svg Animations",
+        },
+      },
     ],
   },
 ];
