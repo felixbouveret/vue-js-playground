@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Navigation />
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
@@ -7,8 +8,12 @@
 </template>
 
 <script>
+import Navigation from "@/components/Navigation";
 export default {
   name: "App",
+  components: {
+    Navigation,
+  },
   watch: {
     $route(to) {
       document.title = to.meta.title || "Playground";
