@@ -15,20 +15,22 @@ export default {};
 
 <style lang="scss" scoped>
 .root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   height: 100vh;
   min-height: 700px;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 .button {
   margin-top: 25px;
+
   text-align: center;
 }
 .switch {
   position: relative;
+
   display: inline-block;
   width: 60px;
   height: 34px;
@@ -39,26 +41,33 @@ export default {};
 
 .slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  background: grey;
-  transition: 0.5s;
+  left: 0;
+
   border-radius: 200px;
+
+  background: grey;
+  cursor: pointer;
+
+  transition: 0.5s;
 }
 .slider:before {
   position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
   bottom: 4px;
+  left: 4px;
+
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+
   background-color: white;
+
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-radius: 50%;
+
+  content: "";
 }
 input:checked + .slider {
   background-color: #2196f3;

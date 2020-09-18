@@ -1,6 +1,7 @@
 <template>
   <section class="root">
     <div class="inner">
+      <span>{{ points }}</span>
       <div class="snake_container">
         <div v-for="i in 15" :key="i" class="snake_row">
           <div v-for="o in 15" :key="o" class="snake_block" />
@@ -12,6 +13,8 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -31,7 +34,24 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState("app", ["username"]),
+    snakeBlock() {
+      return document.querySelectorAll(".snake_block");
+    },
+
+    snakeGrid() {
+      let snakeRow = document.querySelectorAll(".snake_row");
+      let snakeGrid = [];
+      for (let i = 0; i < snakeRow.length; i++) {
+        snakeGrid.push(snakeRow[i].querySelectorAll(".snake_block"));
+      }
+      return snakeGrid;
+    },
+  },
+
   methods: {
+    ...mapMutations("games", ["ADD_SNAKE_SCORE"]),
     initGame() {
       if (!this.isGameRunning) {
         if (this.isFirstGame) {
@@ -69,6 +89,7 @@ export default {
           }
         }, 100);
         this.isGameRunning = true;
+        this.$emit("gameStarted", true);
       }
     },
 
@@ -98,7 +119,6 @@ export default {
     },
 
     directionKeyX() {
-      console.log("test");
       if (event.keyCode === 38) {
         if (this.direction.x !== 1) {
           this.direction.x = -1;
@@ -173,8 +193,10 @@ export default {
     },
 
     resetGame() {
+      this.ADD_SNAKE_SCORE({ points: this.points, name: this.username });
       clearInterval(this.intervalFunction);
       this.isGameRunning = false;
+      this.$emit("gameStarted", false);
 
       this.position.x = 7;
       this.position.y = 7;
@@ -190,21 +212,6 @@ export default {
       this.checkSnakeBlockColor();
     },
   },
-
-  computed: {
-    snakeBlock() {
-      return document.querySelectorAll(".snake_block");
-    },
-
-    snakeGrid() {
-      let snakeRow = document.querySelectorAll(".snake_row");
-      let snakeGrid = [];
-      for (let i = 0; i < snakeRow.length; i++) {
-        snakeGrid.push(snakeRow[i].querySelectorAll(".snake_block"));
-      }
-      return snakeGrid;
-    },
-  },
 };
 </script>
 
@@ -212,29 +219,34 @@ export default {
 .snake_row {
   display: flex;
 }
+
 .snake_container {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: calc(15 * 20px);
   flex-wrap: wrap;
   box-sizing: initial;
-  background: linear-gradient(45deg, #bf47fd, #002094);
+  width: calc(15 * 20px);
+  margin: 0 auto;
   border-radius: 10px;
   overflow: hidden;
+
+  background: linear-gradient(45deg, #bf47fd, #002094);
 
   @media (min-width: 540px) {
     width: calc(15 * 32px);
   }
 }
+
 .snake_block {
   width: 20px;
   height: 20px;
+
   @media (min-width: 540px) {
     width: 32px;
     height: 32px;
   }
 }
+
 .snake_row:nth-child(2n) .snake_block:nth-child(2n),
 .snake_row:nth-child(2n + 1) .snake_block:nth-child(2n + 1) {
   background-color: #00000050;

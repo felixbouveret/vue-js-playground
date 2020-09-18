@@ -1,20 +1,37 @@
 <template>
-  <div class="pageRoot">
-    <Navigation />
-    <SnakeModule />
+  <div class="pageRoot" :class="{ gameRunning: isGameStarted }">
+    <SnakeModule @gameStarted="isGameStarted = $event" />
+    <ScoreBoard :score-list="getSnakeSortedScores" />
   </div>
 </template>
 
 <script>
-import Navigation from "@/components/Navigation";
+import { mapGetters } from "vuex";
+
 import SnakeModule from "@/modules/Snake";
+import ScoreBoard from "@/components/ScoreBoard";
 
 export default {
   components: {
-    Navigation,
     SnakeModule,
+    ScoreBoard,
+  },
+
+  data() {
+    return {
+      isGameStarted: false,
+    };
+  },
+
+  computed: {
+    ...mapGetters("games", ["getSnakeSortedScores"]),
   },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.gameRunning {
+  height: 100vh;
+  overflow-y: hidden;
+}
+</style>

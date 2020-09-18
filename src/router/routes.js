@@ -59,6 +59,14 @@ export default [
           title: "Playground | Switch",
         },
       },
+      {
+        path: "palindrome",
+        name: "Palindrome",
+        component: () => import("@/pages/Experiments/Palindrome"),
+        meta: {
+          title: "Playground | Palindrome",
+        },
+      },
     ],
   },
 ];
