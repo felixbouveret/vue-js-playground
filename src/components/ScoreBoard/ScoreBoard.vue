@@ -26,25 +26,27 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  max-width: 300px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  max-width: 300px;
+  margin: 0 auto;
   padding: 8px;
+
   color: white;
 }
 ul {
-  border: white 2px solid;
   max-width: 300px;
-  margin: 0 auto;
   max-height: 300px;
+  margin: 0 auto;
+  border: white 2px solid;
   overflow-y: scroll;
 }
 
 li {
   display: flex;
   justify-content: space-between;
-  color: white;
   padding: 8px;
+
+  color: white;
 }
 </style>

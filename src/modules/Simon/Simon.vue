@@ -203,17 +203,19 @@ export default {
 }
 
 .simon-container {
-  box-sizing: content-box;
   display: grid;
-  grid-template-columns: repeat(2, 100px);
   grid-gap: 24px;
-  margin: auto;
+  grid-template-columns: repeat(2, 100px);
+  box-sizing: content-box;
   max-width: 248px;
   max-height: 248px;
-  transform: rotate(45deg);
+  margin: auto;
   padding: 32px;
   border-radius: 16px;
+
   box-shadow: 0 0 20px 4px transparent;
+  transform: rotate(45deg);
+
   transition: box-shadow 0.3s, background-color 0.3s;
 
   @media (min-width: 720px) {
@@ -225,31 +227,37 @@ export default {
 
 .simon-block {
   position: relative;
+
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  transition: box-shadow 0.3s, background-color 0.3s;
+
   cursor: pointer;
+
+  transition: box-shadow 0.3s, background-color 0.3s;
 
   @media (min-width: 720px) {
     width: 100%;
     height: 100%;
   }
 
-  &:after {
-    content: "";
+  &::after {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+
     width: 0;
     height: 0;
-    opacity: 0;
     border-radius: 4px;
+
     background-color: #ffffff7c;
     box-shadow: 0 0 10px 10px #ffffff7c;
+    transform: translate(-50%, -50%);
+    opacity: 0;
 
     transition: ease 0.3s;
+
+    content: "";
   }
 }
 
@@ -260,10 +268,12 @@ export default {
   &.active {
     box-shadow: 0 0 32px 8px #efe61177;
   }
+
   &:hover {
     box-shadow: 0 0 32px 8px #efe611b9;
   }
 }
+
 .blue {
   background-color: #2281f0;
   box-shadow: 0 0 32px 2px #2281f050;
@@ -271,10 +281,12 @@ export default {
   &.active {
     box-shadow: 0 0 32px 8px #2281f077;
   }
+
   &:hover {
     box-shadow: 0 0 32px 8px #2281f0b9;
   }
 }
+
 .green {
   background-color: #29d34e;
   box-shadow: 0 0 32px 2px #29d34e50;
@@ -282,10 +294,12 @@ export default {
   &.active {
     box-shadow: 0 0 32px 8px #29d34e77;
   }
+
   &:hover {
     box-shadow: 0 0 32px 8px #29d34eb9;
   }
 }
+
 .red {
   background-color: #f24822;
   box-shadow: 0 0 32px 2px #f2482277;
@@ -293,14 +307,16 @@ export default {
   &.active {
     box-shadow: 0 0 32px 8px #f2482277;
   }
+
   &:hover {
     box-shadow: 0 0 32px 8px #f24822b9;
   }
 }
 
-.active:after {
+.active::after {
   width: 30%;
   height: 30%;
+
   opacity: 1;
 }
 

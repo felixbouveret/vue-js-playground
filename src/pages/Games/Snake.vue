@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .gameRunning {
-  overflow-y: hidden;
   height: 100vh;
+  overflow-y: hidden;
 }
 </style>

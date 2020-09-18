@@ -25,26 +25,29 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   width: 100%;
   height: 100%;
+
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .fade-enter-active,
 .fade-leave-active {
   position: relative;
   top: 0;
+
+  transition-timing-function: ease;
   transition-duration: 0.3s;
   transition-property: opacity, top;
-  transition-timing-function: ease;
 }
 
 .fade-enter,
 .fade-leave-active {
   position: relative;
+
   opacity: 0;
 }
 
