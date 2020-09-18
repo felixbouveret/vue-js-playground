@@ -4,6 +4,7 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
+    <portal-target name="root-app"></portal-target>
   </div>
 </template>
 

@@ -30,7 +30,9 @@
           />
         </div>
       </div>
-      <div v-if="isInputShown" class="backdrop" @click="hideInput"></div>
+      <portal to="root-app">
+        <div v-if="isInputShown" class="backdrop" @click="hideInput"></div>
+      </portal>
     </header>
   </transition>
 </template>
