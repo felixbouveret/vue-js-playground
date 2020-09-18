@@ -346,21 +346,25 @@ export default {
 
 <style lang="scss" scoped>
 .playersTurns {
-  font-size: 125%;
   font-weight: 500;
+  font-size: 125%;
+
   transition: color 0.3s;
+
   &.winner {
     color: white;
   }
 }
 
 .puissance {
-  background: linear-gradient(45deg, #bf47fd, #002094);
+  position: relative;
+
   display: inline-flex;
   margin: 16px auto 0;
   padding: 8px;
-  position: relative;
   border-radius: 10px;
+
+  background: linear-gradient(45deg, #bf47fd, #002094);
 
   &::before,
   &::after {
@@ -369,18 +373,21 @@ export default {
 
     width: 50px;
     height: 8px;
+    border-radius: 0 0 2px 2px;
 
     background-color: #bf47fd;
     transform: translateY(100%);
-    border-radius: 0 0 2px 2px;
+
     content: "";
   }
 
   &::before {
     left: 14px;
   }
+
   &::after {
     right: 14px;
+
     background-color: #5e34c6;
   }
 }
@@ -388,10 +395,11 @@ export default {
 .puissance_block {
   width: 32px;
   height: 32px;
-  background-color: #020217;
-  border-radius: 100%;
   margin: 5px;
+  border-radius: 100%;
   overflow: hidden;
+
+  background-color: #020217;
 
   @media (min-width: 540px) {
     width: 50px;
@@ -405,7 +413,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-
     border-radius: 50px;
 
     background-color: transparent;
@@ -417,13 +424,15 @@ export default {
   }
 
   &.activePlayer1::after {
-    background-color: #f9e900;
     top: 0;
+
+    background-color: #f9e900;
   }
 
   &.activePlayer2::after {
-    background-color: #00c2d1;
     top: 0;
+
+    background-color: #00c2d1;
   }
 }
 
@@ -431,14 +440,15 @@ export default {
   position: absolute;
   bottom: -64px;
   left: 50%;
+
   transform: translate(-50%, 100%);
 }
 
 .buttonFade-enter-active,
 .buttonFade-leave-active {
+  transition-timing-function: ease;
   transition-duration: 0.3s;
   transition-property: opacity, bottom;
-  transition-timing-function: ease;
 }
 
 .buttonFade-enter,

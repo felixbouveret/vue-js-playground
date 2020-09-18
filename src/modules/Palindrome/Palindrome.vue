@@ -60,27 +60,32 @@ export default {
 
 span {
   position: absolute;
+  top: -32px;
+  left: 50%;
+
+  margin-top: 16px;
+
   color: white;
   font-size: 2em;
-  margin-top: 16px;
+
   transform: translate(-50%, -100%);
-  left: 50%;
-  top: -32px;
 }
 
 input {
-  background: linear-gradient(45deg, #bf47fd, #002094);
   padding: 16px 24px;
-  border-radius: 4px;
   border: 0;
+  border-radius: 4px;
+
   font-size: 125%;
+
+  background: linear-gradient(45deg, #bf47fd, #002094);
 }
 
 .palinFade-enter-active,
 .palinFade-leave-active {
+  transition-timing-function: ease;
   transition-duration: 0.3s;
   transition-property: opacity, top;
-  transition-timing-function: ease;
 }
 
 .palinFade-enter,

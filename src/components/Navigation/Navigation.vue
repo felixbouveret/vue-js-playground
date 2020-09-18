@@ -30,7 +30,9 @@
           />
         </div>
       </div>
-      <div v-if="isInputShown" class="backdrop" @click="hideInput"></div>
+      <portal to="root-app">
+        <div v-if="isInputShown" class="backdrop" @click="hideInput"></div>
+      </portal>
     </header>
   </transition>
 </template>
@@ -84,22 +86,25 @@ export default {
 <style lang="scss" scoped>
 header {
   position: absolute;
-  width: 100%;
   top: 0;
   left: 0;
+
+  width: 100%;
 }
 header .inner {
-  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 64px;
 }
 
 .back-button {
   position: relative;
-  font-size: 115%;
-  font-weight: 600;
+
   color: #47617a;
+  font-weight: 600;
+  font-size: 115%;
+
   transition: color 0.3s;
 
   &:hover {
@@ -111,37 +116,47 @@ header .inner {
 }
 
 svg {
-  fill: #47617a;
   height: 12px;
+
   transition: fill 0.3s;
+
+  fill: #47617a;
 }
 
 .username {
   position: relative;
   z-index: 1;
+
   display: flex;
   align-items: center;
-  color: black;
-  font-size: 105%;
-  font-weight: 400;
   padding-left: 4px;
-  transition-property: color;
-  transition-duration: 0.3s;
+
+  color: black;
+  font-weight: 400;
+  font-size: 105%;
+
   cursor: pointer;
 
+  transition-duration: 0.3s;
+  transition-property: color;
+
   &::before {
-    content: "";
     position: absolute;
     top: 0%;
     left: 0;
+    z-index: -1;
+
     width: 100%;
     height: 100%;
+    border-radius: 4px;
+
     background: linear-gradient(45deg, #bf47fd, #002094);
     opacity: 1;
-    transition-property: opacity;
+
     transition-duration: 0.3s;
-    z-index: -1;
-    border-radius: 4px;
+    transition-property: opacity;
+
+    content: "";
   }
 
   &.isOpen,
@@ -150,17 +165,21 @@ svg {
       opacity: 1;
     }
     svg {
-      opacity: 1;
       margin-right: 0;
+
+      opacity: 1;
     }
   }
 
   svg {
-    fill: black;
-    opacity: 0;
-    transition-property: opacity, margin-right;
-    transition-duration: 0.3s;
     margin-right: -24px;
+
+    opacity: 0;
+
+    transition-duration: 0.3s;
+    transition-property: opacity, margin-right;
+
+    fill: black;
   }
 
   p {
@@ -168,29 +187,32 @@ svg {
   }
 
   input {
-    background-color: transparent;
-    border: none;
-    color: white;
     padding: 8px 0 8px 4px;
+    border: none;
+
+    color: white;
     font-size: 100%;
+
+    background-color: transparent;
     outline: none;
   }
 }
 
 .backdrop {
   position: absolute;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
   z-index: 0;
+
+  width: 100%;
+  height: 100%;
 }
 
 .fade-enter-active,
 .fade-leave-active {
+  transition-timing-function: ease;
   transition-duration: 0.3s;
   transition-property: opacity;
-  transition-timing-function: ease;
 }
 
 .fade-enter,

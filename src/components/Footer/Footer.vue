@@ -52,8 +52,9 @@ footer {
   margin-bottom: 16px;
   @media (min-width: 720px) {
     position: absolute;
-    margin-bottom: 0;
     bottom: 16px;
+
+    margin-bottom: 0;
   }
 }
 
@@ -75,8 +76,10 @@ ul {
     display: block;
     width: 24px;
     height: 24px;
-    fill: #2c3e50;
+
     transition: fill 0.3s;
+
+    fill: #2c3e50;
   }
 
   a:hover svg {

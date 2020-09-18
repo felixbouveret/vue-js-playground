@@ -76,25 +76,29 @@ h2 {
   }
 
   @media (min-width: 540px) {
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
   }
   @media (min-width: 720px) {
-    grid-template-columns: repeat(3, 1fr);
     grid-gap: 32px;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .nav-link {
   position: relative;
   z-index: 1;
+
   display: block;
-  background: linear-gradient(45deg, #bf47fd, #002094);
   padding: 64px 32px;
   border-radius: 8px;
-  font-size: 125%;
+
   font-weight: 500;
+  font-size: 125%;
+
+  background: linear-gradient(45deg, #bf47fd, #002094);
   box-shadow: 0 0 0 0px #306682;
+
   transition: box-shadow 0.3s;
 
   &:hover {

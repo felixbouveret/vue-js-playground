@@ -219,29 +219,34 @@ export default {
 .snake_row {
   display: flex;
 }
+
 .snake_container {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: calc(15 * 20px);
   flex-wrap: wrap;
   box-sizing: initial;
-  background: linear-gradient(45deg, #bf47fd, #002094);
+  width: calc(15 * 20px);
+  margin: 0 auto;
   border-radius: 10px;
   overflow: hidden;
+
+  background: linear-gradient(45deg, #bf47fd, #002094);
 
   @media (min-width: 540px) {
     width: calc(15 * 32px);
   }
 }
+
 .snake_block {
   width: 20px;
   height: 20px;
+
   @media (min-width: 540px) {
     width: 32px;
     height: 32px;
   }
 }
+
 .snake_row:nth-child(2n) .snake_block:nth-child(2n),
 .snake_row:nth-child(2n + 1) .snake_block:nth-child(2n + 1) {
   background-color: #00000050;
