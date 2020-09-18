@@ -2,7 +2,7 @@ export default [
   {
     path: "/",
     name: "Home",
-    component: () => import("@/pages/index"),
+    component: () => import("@/pages/Home"),
   },
   {
     path: "/games",

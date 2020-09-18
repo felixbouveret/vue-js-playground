@@ -1,11 +1,16 @@
 <template>
   <div class="pageRoot">
-    <h1>Games</h1>
+    <GamesModule />
   </div>
 </template>
 
 <script>
-export default {};
+import GamesModule from "@/modules/Games";
+export default {
+  components: {
+    GamesModule,
+  },
+};
 </script>
 
 <style></style>

@@ -124,7 +124,6 @@ svg {
   display: flex;
   align-items: center;
   color: black;
-  font-size: 105%;
   font-weight: 400;
   padding-left: 4px;
   transition-property: color;
@@ -167,6 +166,7 @@ svg {
 
   p {
     padding: 8px 8px 8px 4px;
+    font-size: 100%;
   }
 
   input {
@@ -174,8 +174,8 @@ svg {
     border: none;
     color: white;
     padding: 8px 0 8px 4px;
-    font-size: 100%;
     outline: none;
+    font-size: 100%;
   }
 }
 

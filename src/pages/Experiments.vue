@@ -1,11 +1,16 @@
 <template>
   <div class="pageRoot">
-    <h1>Experiments</h1>
+    <ExperimentsModule />
   </div>
 </template>
 
 <script>
-export default {};
+import ExperimentsModule from "@/modules/Experiments";
+export default {
+  components: {
+    ExperimentsModule,
+  },
+};
 </script>
 
 <style></style>

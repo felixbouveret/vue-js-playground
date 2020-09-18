@@ -5,20 +5,37 @@
 
       <div class="nav">
         <template v-for="(route, routeIndex) in routes">
-          <h2 v-if="route.path !== '/'" :key="routeIndex + '-title'">
-            {{ route.name }}
-          </h2>
-          <ul v-if="route.path !== '/'" :key="routeIndex" class="nav-list">
-            <template v-for="(child, childIndex) in route.children">
-              <li v-if="child.path !== ''" :key="childIndex" class="nav-block">
-                <router-link
-                  :to="route.path + '/' + child.path"
-                  class="nav-link"
-                  >{{ child.name }}
-                </router-link>
-              </li>
-            </template>
-          </ul>
+          <div
+            v-if="route.path !== '/'"
+            :key="routeIndex"
+            class="nav-container"
+          >
+            <h2 :key="routeIndex + '-title'">
+              {{ route.name }}
+            </h2>
+            <ul :key="routeIndex" class="nav-list">
+              <template v-for="(child, childIndex) in route.children">
+                <li
+                  v-if="child.path !== '' && childIndex <= 3"
+                  :key="childIndex"
+                  class="nav-block"
+                >
+                  <router-link
+                    :to="route.path + '/' + child.path"
+                    class="nav-link"
+                    >{{ child.name }}
+                  </router-link>
+                </li>
+              </template>
+            </ul>
+            <router-link
+              :to="route.path"
+              :key="routeIndex + '-link'"
+              class="page-link"
+            >
+              More {{ route.name.toLowerCase() }}
+            </router-link>
+          </div>
         </template>
       </div>
     </div>
@@ -67,13 +84,18 @@ h2 {
   max-width: 800px;
   margin: 64px auto 64px;
 }
-.nav-list {
-  display: grid;
-  grid-gap: 16px;
+
+.nav-container {
   margin-bottom: 48px;
+
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.nav-list {
+  display: grid;
+  grid-gap: 16px;
 
   @media (min-width: 540px) {
     grid-template-columns: repeat(2, 1fr);
@@ -99,6 +121,17 @@ h2 {
 
   &:hover {
     box-shadow: 0 0 27px 0px #306682;
+  }
+}
+
+.page-link {
+  display: block;
+  margin-top: 24px;
+  text-decoration: underline;
+  color: #47617a;
+  transition: color 0.3s;
+  &:hover {
+    color: #708294;
   }
 }
 </style>
