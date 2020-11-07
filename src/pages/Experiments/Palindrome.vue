@@ -4,11 +4,11 @@
   </div>
 </template>
 <script>
-import PalindromeModule from "@/modules/Palindrome";
+import PalindromeModule from '@/modules/Palindrome'
 
 export default {
   components: {
     PalindromeModule,
   },
-};
+}
 </script>

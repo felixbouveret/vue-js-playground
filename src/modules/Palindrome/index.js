@@ -1,1 +1,1 @@
-export { default } from "./Palindrome";
+export { default } from './Palindrome'

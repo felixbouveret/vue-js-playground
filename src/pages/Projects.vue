@@ -1,6 +1,6 @@
 <template>
   <div class="pageRoot">
-    <h1>Games</h1>
+    <h1>Projects</h1>
   </div>
 </template>
 

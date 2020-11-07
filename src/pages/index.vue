@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import routes from "@/router/routes";
-import Footer from "@/components/Footer";
+import routes from '@/router/routes'
+import Footer from '@/components/Footer'
 
 export default {
   components: {
@@ -38,9 +38,9 @@ export default {
   data() {
     return {
       routes: routes,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
