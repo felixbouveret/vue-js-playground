@@ -24,8 +24,8 @@
           <input
             v-show="isInputShown"
             ref="input"
-            type="text"
             v-model="usernameDisplayed"
+            type="text"
             @keydown="isHitingEnter"
           />
         </div>
@@ -38,49 +38,49 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data() {
     return {
       usernameDisplayed: this.$store.state.app.username
         ? this.$store.state.app.username
-        : "Anonymous",
+        : 'Anonymous',
       isInputShown: false,
-    };
+    }
   },
 
   computed: {
-    ...mapState("app", ["username"]),
+    ...mapState('app', ['username']),
   },
 
   methods: {
-    ...mapMutations("app", ["SET_USERNAME"]),
+    ...mapMutations('app', ['SET_USERNAME']),
 
     showInput() {
-      this.isInputShown = true;
+      this.isInputShown = true
       setTimeout(() => {
-        this.$refs.input.focus();
-      }, 50);
+        this.$refs.input.focus()
+      }, 50)
     },
 
     isHitingEnter(event) {
-      if (event.code === "Enter") {
-        this.hideInput();
+      if (event.code === 'Enter') {
+        this.hideInput()
       }
     },
 
     hideInput() {
-      this.isInputShown = false;
+      this.isInputShown = false
 
-      if (this.usernameDisplayed !== "") {
-        this.SET_USERNAME(this.usernameDisplayed);
+      if (this.usernameDisplayed !== '') {
+        this.SET_USERNAME(this.usernameDisplayed)
       } else {
-        this.usernameDisplayed = this.username;
+        this.usernameDisplayed = this.username
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -156,7 +156,7 @@ svg {
     transition-duration: 0.3s;
     transition-property: opacity;
 
-    content: "";
+    content: '';
   }
 
   &.isOpen,

@@ -1,72 +1,92 @@
 export default [
   {
-    path: "/",
-    name: "Home",
-    component: () => import("@/pages/index"),
+    path: '/',
+    name: 'Home',
+    component: () => import('@/pages/index'),
   },
   {
-    path: "/games",
-    name: "Games",
-    component: { render: (c) => c("router-view") },
+    path: '/games',
+    name: 'Games',
+    component: { render: (c) => c('router-view') },
 
     children: [
       {
-        path: "",
-        name: "Games",
-        component: () => import("@/pages/Games"),
+        path: '',
+        name: 'Games',
+        component: () => import('@/pages/Games'),
       },
       {
-        path: "simon",
-        name: "Simon",
-        component: () => import("@/pages/Games/Simon"),
+        path: 'simon',
+        name: 'Simon',
+        component: () => import('@/pages/Games/Simon'),
         meta: {
-          title: "Playground | Simon",
+          title: 'Playground | Simon',
         },
       },
       {
-        path: "snake",
-        name: "Snake",
-        component: () => import("@/pages/Games/Snake"),
+        path: 'snake',
+        name: 'Snake',
+        component: () => import('@/pages/Games/Snake'),
         meta: {
-          title: "Playground | Snack",
+          title: 'Playground | Snack',
         },
       },
       {
-        path: "puissance4",
-        name: "Puissance 4",
-        component: () => import("@/pages/Games/Puissance4"),
+        path: 'connect4',
+        name: 'Connect 4',
+        component: () => import('@/pages/Games/Puissance4'),
         meta: {
-          title: "Playground | Puissance4",
+          title: 'Playground | Connect 4',
         },
       },
     ],
   },
   {
-    path: "/experiments",
-    name: "Experiments",
-    component: { render: (c) => c("router-view") },
+    path: '/experiments',
+    name: 'Experiments',
+    component: { render: (c) => c('router-view') },
     children: [
       {
-        path: "",
-        name: "Experiments",
-        component: () => import("@/pages/Experiments"),
+        path: '',
+        name: 'Experiments',
+        component: () => import('@/pages/Experiments'),
       },
       {
-        path: "switch",
-        name: "Switch",
-        component: () => import("@/pages/Experiments/Switch"),
+        path: 'switch',
+        name: 'Switch',
+        component: () => import('@/pages/Experiments/Switch'),
         meta: {
-          title: "Playground | Switch",
+          title: 'Playground | Switch',
         },
       },
       {
-        path: "palindrome",
-        name: "Palindrome",
-        component: () => import("@/pages/Experiments/Palindrome"),
+        path: 'palindrome',
+        name: 'Palindrome',
+        component: () => import('@/pages/Experiments/Palindrome'),
         meta: {
-          title: "Playground | Palindrome",
+          title: 'Playground | Palindrome',
         },
       },
     ],
   },
-];
+  {
+    path: '/projects',
+    name: 'Projects',
+    component: { render: (c) => c('router-view') },
+    children: [
+      {
+        path: '',
+        name: 'Projects',
+        component: () => import('@/pages/Projects'),
+      },
+      {
+        path: 'comme-au-stade',
+        name: 'Comme Au Stade',
+        component: () => import('@/pages/Projects/CommeAuStade'),
+        meta: {
+          title: 'Playground | Comme Au Stade',
+        },
+      },
+    ],
+  },
+]

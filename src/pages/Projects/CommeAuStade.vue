@@ -1,15 +1,15 @@
 <template>
   <div class="pageRoot">
-    <SwitchModule />
+    <CommeAuStadeModule />
   </div>
 </template>
 
 <script>
-import SwitchModule from '@/modules/Switch'
+import CommeAuStadeModule from '@/modules/CommeAuStade'
 
 export default {
   components: {
-    SwitchModule,
+    CommeAuStadeModule,
   },
 }
 </script>

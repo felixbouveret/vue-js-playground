@@ -40,11 +40,11 @@
 export default {
   computed: {
     getYear() {
-      const currentDate = new Date();
-      return currentDate.getFullYear();
+      const currentDate = new Date()
+      return currentDate.getFullYear()
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

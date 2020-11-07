@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>
@@ -67,7 +67,7 @@ export default {};
   -webkit-transition: 0.4s;
   transition: 0.4s;
 
-  content: "";
+  content: '';
 }
 input:checked + .slider {
   background-color: #2196f3;
