@@ -18,15 +18,15 @@
           v-for="(col, colId) in grid"
           :key="colId"
           class="puissance_col"
-          @click="!winningPlayer ? addCoin(col, colId) : null"
+          @click="!winningPlayer ? addCoin(col) : null"
         >
           <div
-            v-for="(block, blockId) in col.blocks"
+            v-for="(block, blockId) in col.rows"
             :key="blockId"
             class="puissance_block"
             :class="{
-              activePlayer1: block.player === 1,
-              activePlayer2: block.player === 2,
+              activePlayer1: block.isFirstPlayer === 1,
+              activePlayer2: block.isFirstPlayer === 2,
             }"
           />
         </div>
@@ -48,85 +48,11 @@
 export default {
   data() {
     return {
-      grid: [
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-        {
-          activeBlocks: 0,
-          blocks: [
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-            { player: false },
-          ],
-        },
-      ],
+      grid: [],
+      gridDimentions: {
+        columns: 7,
+        rows: 6,
+      },
       button: {
         restart: {
           text: 'Restart',
@@ -136,6 +62,7 @@ export default {
       player: true,
       winningPlayer: 0,
       gameRunning: false,
+      winCondition: 4,
     }
   },
 
@@ -149,178 +76,219 @@ export default {
     },
   },
 
+  mounted() {
+    this.generateGridArray()
+  },
+
   methods: {
+    generateGridArray() {
+      const rowsLimit = this.gridDimentions.rows
+      const columnsLimit = this.gridDimentions.columns
+
+      for (let gridColumn = 0; gridColumn < columnsLimit; gridColumn++) {
+        const columnObject = {
+          id: gridColumn,
+          activeRows: 0,
+          rows: [],
+        }
+
+        for (let gridRow = 0; gridRow < rowsLimit; gridRow++) {
+          columnObject.rows.push({ isFirstPlayer: false })
+        }
+
+        this.grid.push(columnObject)
+      }
+    },
+
     resetGame() {
       this.winningPlayer = 0
       this.player = true
-      for (let col = 0; col < this.grid.length; col++) {
-        const columnObject = this.grid[col]
-        columnObject.activeBlocks = 0
-        for (let blockId = 0; blockId < columnObject.blocks.length; blockId++) {
-          const block = columnObject.blocks[blockId]
-          block.player = false
-        }
-      }
+      this.generateGridArray()
     },
-    addCoin(column, colId) {
-      if (!this.gameRunning) {
-        this.gameRunning = true
-      }
 
-      let blockId = this.reversedBlockId(column)
-      if (blockId >= 0) {
-        column.blocks[blockId].player = this.currentPlayer
-        column.activeBlocks++
+    addCoin(columnObject) {
+      const emptyBlockIndex = this.getFirstEmptyBlockIndex(columnObject)
+
+      if (emptyBlockIndex >= 0) {
+        this.setCurrentPlayerForEmptyBlock(columnObject, emptyBlockIndex)
+        this.incrementActiveRows(columnObject)
         this.switchPlayer()
-        this.checkColumns(column)
-        this.checkRows(blockId)
-        this.checkDiagonal(column, colId, blockId)
-        this.checkAntiDiagonal(column, colId, blockId)
+        this.winCheck(columnObject, emptyBlockIndex)
       }
     },
 
-    checkColumns(column) {
-      let sequence = 0
-      for (
-        let blockIndex = column.blocks.length - 1;
-        blockIndex >= 0;
-        blockIndex--
-      ) {
-        const hasPreviousBlock = column.blocks[blockIndex - 1] ? true : false
-        const previousblock = hasPreviousBlock
-          ? column.blocks[blockIndex - 1]
-          : false
-        const block = column.blocks[blockIndex]
-
-        if (block.player && block.player === previousblock.player) {
-          sequence++
-
-          if (sequence >= 3) {
-            this.finishGame(block.player)
-          }
-        } else {
-          sequence = 0
-        }
-      }
+    incrementActiveRows(columnObject) {
+      columnObject.activeRows++
     },
 
-    checkRows(row) {
-      let sequence = 0
-      for (let blockIndex = 0; blockIndex < this.grid.length; blockIndex++) {
-        const hasPreviousColumn = this.grid[blockIndex - 1] ? true : false
-        const previousColumn = hasPreviousColumn
-          ? this.grid[blockIndex - 1].blocks
-          : false
-        const column = this.grid[blockIndex].blocks
+    setGameAsRunning() {
+      this.gameRunning = true
+    },
+
+    setCurrentPlayerForEmptyBlock(columnObject, emptyBlockIndex) {
+      columnObject.rows[emptyBlockIndex].isFirstPlayer = this.currentPlayer
+    },
+
+    winCheck(columnObject, emptyBlockIndex) {
+      this.checkLinear('column', columnObject)
+      this.checkLinear('row', columnObject, emptyBlockIndex)
+      // this.checkRows(emptyBlockIndex)
+      this.checkDiagonal(false, columnObject, emptyBlockIndex)
+      this.checkDiagonal(true, columnObject, emptyBlockIndex)
+      // this.checkAntiDiagonal(columnObject, emptyBlockIndex)
+    },
+
+    checkLinear(checkType, columnObject, emptyBlockIndex) {
+      let sequence = 1
+      let loopLimit
+      let blockArray
+
+      switch (checkType) {
+        case 'column':
+          loopLimit = columnObject.rows.length
+          blockArray = (id) => columnObject.rows[id]
+          break
+
+        case 'row':
+          loopLimit = this.grid.length
+          blockArray = (id, secondId) =>
+            this.grid[id] ? this.grid[id].rows[secondId] : undefined
+          break
+
+        default:
+          break
+      }
+
+      for (let blockIndex = 0; blockIndex < loopLimit; blockIndex++) {
+        const currentBlock = blockArray(blockIndex, emptyBlockIndex)
+        const nextBlock = blockArray(blockIndex + 1, emptyBlockIndex)
 
         if (
-          previousColumn[row] &&
-          column[row].player &&
-          column[row].player === previousColumn[row].player
+          nextBlock !== undefined &&
+          currentBlock.isFirstPlayer === nextBlock.isFirstPlayer
         ) {
           sequence++
-          if (sequence >= 3) {
-            this.finishGame(column[row].player)
+
+          if (sequence === this.winCondition) {
+            this.finishGame(currentBlock.isFirstPlayer)
           }
         } else {
-          sequence = 0
+          sequence = 1
         }
       }
     },
 
-    checkDiagonal(colObject, column, row) {
-      const startingBlock = this.getStartingDiagonal(colObject, column, row)
-      let sequence = 0
+    checkDiagonal(isAnti, colObject, row) {
+      let sequence = 1
 
-      let o = startingBlock.row
+      const startingBlock = this.getStartingDiagonal(isAnti, colObject, row)
+      let startingRow = startingBlock.newRow
+      const gridLength = this.grid.length
 
-      for (let index = startingBlock.col; index < this.grid.length; index++) {
-        const currentBlock = this.grid[index].blocks[o]
-        const previousBlock =
-          this.grid[index - 1] && this.grid[index - 1].blocks[o + 1]
-            ? this.grid[index - 1].blocks[o + 1]
-            : false
+      for (
+        let blockIndex = startingBlock.newCol;
+        blockIndex < gridLength;
+        blockIndex++
+      ) {
+        const currentBlock = this.grid[blockIndex].rows[startingRow]
+        const nextBlock = this.grid[blockIndex + 1]
+          ? this.grid[blockIndex + 1].rows[startingRow - 1]
+          : undefined
 
-        if (o >= 0) {
-          if (
-            previousBlock &&
-            currentBlock.player &&
-            previousBlock.player === currentBlock.player
-          ) {
-            sequence++
-            if (sequence >= 3) {
-              this.finishGame(currentBlock.player)
-            }
-          } else {
-            sequence = 0
+        if (
+          nextBlock !== undefined &&
+          currentBlock.isFirstPlayer === nextBlock.isFirstPlayer
+        ) {
+          sequence++
+
+          if (sequence === this.winCondition) {
+            this.finishGame(currentBlock.isFirstPlayer)
+            break
           }
-          o--
+        } else {
+          sequence = 1
         }
+        startingRow--
       }
     },
 
-    checkAntiDiagonal(colObject, column, row) {
-      const startingBlock = this.getStartingAntiDiagonal(colObject, column, row)
+    // checkAntiDiagonal(colObject, row) {
+    //   const startingBlock = this.getStartingAntiDiagonal(colObject, row)
 
-      let sequence = 0
+    //   let sequence = 0
 
-      let o = startingBlock.row
+    //   let o = startingBlock.row
 
-      for (let index = startingBlock.col; index >= 0; index--) {
-        const currentBlock = this.grid[index].blocks[o]
-        const previousBlock =
-          this.grid[index + 1] && this.grid[index + 1].blocks[o + 1]
-            ? this.grid[index + 1].blocks[o + 1]
-            : false
+    //   for (let index = startingBlock.col; index >= 0; index--) {
+    //     const currentBlock = this.grid[index].rows[o]
+    //     const previousBlock =
+    //       this.grid[index + 1] && this.grid[index + 1].rows[o + 1]
+    //         ? this.grid[index + 1].rows[o + 1]
+    //         : false
 
-        if (o >= 0) {
-          if (
-            previousBlock &&
-            currentBlock.player &&
-            previousBlock.player === currentBlock.player
-          ) {
-            sequence++
-            if (sequence >= 3) {
-              this.finishGame(currentBlock.player)
-            }
-          } else {
-            sequence = 0
-          }
-          o--
-        }
-      }
-    },
+    //     if (o >= 0) {
+    //       if (
+    //         previousBlock &&
+    //         currentBlock.isFirstPlayer &&
+    //         previousBlock.isFirstPlayer === currentBlock.isFirstPlayer
+    //       ) {
+    //         sequence++
+    //         if (sequence >= 3) {
+    //           this.finishGame(currentBlock.isFirstPlayer)
+    //         }
+    //       } else {
+    //         sequence = 0
+    //       }
+    //       o--
+    //     }
+    //   }
+    // },
 
     switchPlayer() {
       this.player = !this.player
     },
 
-    reversedBlockId(column) {
-      return column.blocks.length - column.activeBlocks - 1
+    getFirstEmptyBlockIndex(columnObject) {
+      return columnObject.rows.length - columnObject.activeRows - 1
     },
 
-    getStartingDiagonal(colObject, column, row) {
-      const collBlocks = colObject.blocks
-      let startingBlock = {
-        row: row,
-        col: column,
+    getStartingDiagonal(isAnti, columnObject, rowId) {
+      const activeRows = columnObject.activeRows - 1
+      let colId = columnObject.id
+      let newRow
+      let newCol
+
+      if (isAnti) {
+        newRow = rowId - colId
+        newCol = colId - columnObject.rows.length - activeRows
+        console.log(newRow, newCol)
+      } else {
+        newRow = rowId + activeRows
+        newCol = colId - activeRows
       }
-      if (row < collBlocks.length - 1) {
-        for (let index = row; index < collBlocks.length - 1; index++) {
-          if (startingBlock.col - 1 >= 0) {
-            startingBlock.row = index + 1
-            startingBlock.col--
-          }
+
+      if (newCol < 0) {
+        if (!isAnti) {
+          newRow += newCol
         }
+        newCol = 0
       }
-      return startingBlock
+      if (isAnti && newRow < 0) {
+        newRow = 0
+      }
+      let startingBlockCoor = {
+        newRow: newRow,
+        newCol: newCol,
+      }
+
+      return startingBlockCoor
     },
 
-    getStartingAntiDiagonal(colObject, column, row) {
-      const collBlocks = colObject.blocks
+    getStartingAntiDiagonal(columnObject, row) {
+      const collBlocks = columnObject.rows
       let startingBlock = {
         row: row,
-        col: column,
+        col: columnObject.id,
       }
       if (row < collBlocks.length - 1) {
         for (let index = row; index < collBlocks.length - 1; index++) {
@@ -341,7 +309,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.playersTurns {
+.isFirstPlayersTurns {
   font-weight: 500;
   font-size: 125%;
 

@@ -5,6 +5,26 @@ export default [
     component: () => import('@/pages/index'),
   },
   {
+    path: '/projects',
+    name: 'Projects',
+    component: { render: (c) => c('router-view') },
+    children: [
+      {
+        path: '',
+        name: 'Projects',
+        component: () => import('@/pages/Projects'),
+      },
+      {
+        path: 'comme-au-stade',
+        name: 'Comme Au Stade',
+        component: () => import('@/pages/Projects/CommeAuStade'),
+        meta: {
+          title: 'Playground | Comme Au Stade',
+        },
+      },
+    ],
+  },
+  {
     path: '/games',
     name: 'Games',
     component: { render: (c) => c('router-view') },
@@ -65,26 +85,6 @@ export default [
         component: () => import('@/pages/Experiments/Palindrome'),
         meta: {
           title: 'Playground | Palindrome',
-        },
-      },
-    ],
-  },
-  {
-    path: '/projects',
-    name: 'Projects',
-    component: { render: (c) => c('router-view') },
-    children: [
-      {
-        path: '',
-        name: 'Projects',
-        component: () => import('@/pages/Projects'),
-      },
-      {
-        path: 'comme-au-stade',
-        name: 'Comme Au Stade',
-        component: () => import('@/pages/Projects/CommeAuStade'),
-        meta: {
-          title: 'Playground | Comme Au Stade',
         },
       },
     ],
