@@ -21,11 +21,18 @@
         </div>
       </div>
     </div>
+    <LoosePopup v-if="showLoosePopup" @close="closeLoosePopup()" />
   </section>
 </template>
 
 <script>
+import { LoosePopup } from './components'
+
 export default {
+  components: {
+    LoosePopup,
+  },
+
   data() {
     return {
       boardSize: 15,
@@ -106,7 +113,8 @@ export default {
         this.flagClick(rowObject, colObject)
       } else {
         if (colObject.isFlaged) return
-        if (colObject.hasBomb) this.showBlock(rowObject, colObject)
+        if (colObject.hasBomb) this.gameEnd('loose')
+        this.showBlock(rowObject, colObject)
       }
     },
 
@@ -167,7 +175,7 @@ export default {
 
     setRandomBomb() {
       if (
-        this.flatGrid[this.getRandomBombId()].hasBomb &&
+        this.flatGrid[this.getRandomBombId()].hasBomb ||
         this.flatGrid[this.getRandomBombId()].isFirstClick
       ) {
         this.setRandomBomb()
@@ -203,7 +211,12 @@ export default {
       }
     },
 
-    loose() {},
+    closeLoosePopup() {
+      this.showLoosePopup = false
+      this.hasClicked = false
+      this.boardGrid = []
+      this.createGrid()
+    },
   },
 }
 </script>
