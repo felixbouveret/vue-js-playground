@@ -59,6 +59,14 @@ export default [
           title: 'Playground | Connect 4',
         },
       },
+      {
+        path: 'mine-sweeper',
+        name: 'Mine Sweeper',
+        component: () => import('@/pages/Games/MineSweeper'),
+        meta: {
+          title: 'Playground | Mine Sweeper',
+        },
+      },
     ],
   },
   {
