@@ -1,6 +1,9 @@
 <template>
   <section class="root">
     <div class="inner">
+      <div class="infos">
+        <span> Mines: {{ bombList.length - flagNumber }} </span>
+      </div>
       <div class="mine_container">
         <div v-for="i in boardGrid" :key="i.id" class="mine_row">
           <div
@@ -35,6 +38,7 @@ export default {
 
   data() {
     return {
+      flagNumber: 0,
       boardSize: 15,
       boardGrid: [],
       bombList: [],
@@ -64,8 +68,7 @@ export default {
 
   watch: {
     boardSize: function() {
-      this.boardGrid = []
-      this.createGrid()
+      this.resetGame()
     },
   },
 
@@ -127,16 +130,17 @@ export default {
     },
 
     flagBlock(rowObject, colObject) {
+      this.flagNumber++
       colObject.isFlaged = true
     },
 
     unflagBlock(rowObject, colObject) {
+      this.flagNumber--
       colObject.isFlaged = false
     },
 
     showBlock(rowObject, colObject) {
       colObject.isShowed = true
-      console.log('show', colObject.isShowed)
     },
 
     setBombNumber() {
@@ -174,13 +178,11 @@ export default {
     },
 
     setRandomBomb() {
-      if (
-        this.flatGrid[this.getRandomBombId()].hasBomb ||
-        this.flatGrid[this.getRandomBombId()].isFirstClick
-      ) {
+      const randomBlock = this.flatGrid[this.getRandomBombId()]
+      if (randomBlock.isFirstClick) return
+      if (randomBlock.hasBomb) {
         this.setRandomBomb()
       } else {
-        const randomBlock = this.flatGrid[this.getRandomBombId()]
         randomBlock.hasBomb = true
         this.bombList.push(randomBlock)
       }
@@ -211,11 +213,16 @@ export default {
       }
     },
 
-    closeLoosePopup() {
-      this.showLoosePopup = false
+    resetGame() {
       this.hasClicked = false
+      this.flagNumber = 0
       this.boardGrid = []
       this.createGrid()
+    },
+
+    closeLoosePopup() {
+      this.showLoosePopup = false
+      this.resetGame()
     },
   },
 }
