@@ -2,7 +2,7 @@
   <section class="root">
     <div class="inner">
       <div class="infos">
-        <span> Mines: {{ bombList.length - flagNumber }} </span>
+        <span v-if="bombList"> Mines: {{ bombList.length - flagNumber }} </span>
       </div>
       <div class="mine_container">
         <div v-for="i in boardGrid" :key="i.id" class="mine_row">
@@ -54,11 +54,7 @@ export default {
     },
 
     bombNumber() {
-      return Math.floor(this.totalBlocks / 8)
-    },
-
-    bombDropRate() {
-      return this.totalBlocks / this.bombNumber
+      return Math.floor(this.totalBlocks / 5)
     },
 
     flatGrid() {
@@ -108,6 +104,7 @@ export default {
       this.hasClicked = true
       this.createBombs()
       colObject.isShowed = true
+      this.showSafeAreaOnClick(colObject)
     },
 
     regularClick(event, rowObject, colObject) {
@@ -141,6 +138,7 @@ export default {
 
     showBlock(rowObject, colObject) {
       colObject.isShowed = true
+      this.showSafeAreaOnClick(colObject)
     },
 
     setBombNumber() {
@@ -168,6 +166,49 @@ export default {
       }
 
       colObject.bombNumber = bombNumber
+    },
+
+    showSafeAreaOnClick(colObject) {
+      if (colObject.bombNumber) return
+      const coordonates = {
+        row: parseInt(colObject.gId.split('-')[0]),
+        col: parseInt(colObject.gId.split('-')[1]),
+      }
+
+      for (let row = 0; row < this.boardSize; row++) {
+        const test = `${coordonates.row + row}-${coordonates.col}`
+        const testElement = this.flatGrid.find((e) => e.gId === test)
+        if (
+          testElement === undefined ||
+          testElement.bombNumber > 0 ||
+          testElement.hasBomb
+        )
+          break
+
+        for (let col = 0; col < this.boardSize; col++) {
+          const gId = `${coordonates.row + row}-${coordonates.col + col}`
+          const element = this.flatGrid.find((e) => e.gId === gId)
+          if (element === undefined) break
+          if (element.bombNumber > 0 || element.hasBomb) break
+          this.clearBlock(element)
+        }
+      }
+    },
+
+    clearBlock(colObject) {
+      const colCoordonates = {
+        row: parseInt(colObject.gId.split('-')[0]),
+        col: parseInt(colObject.gId.split('-')[1]),
+      }
+      for (let row = -1; row < 2; row++) {
+        for (let col = -1; col < 2; col++) {
+          const gId = `${colCoordonates.row + row}-${colCoordonates.col + col}`
+          const element = this.flatGrid.find((e) => e.gId === gId)
+          if (element) {
+            element.isShowed = true
+          }
+        }
+      }
     },
 
     createBombs() {
@@ -217,6 +258,7 @@ export default {
       this.hasClicked = false
       this.flagNumber = 0
       this.boardGrid = []
+      this.bombList = []
       this.createGrid()
     },
 
