@@ -21,8 +21,8 @@
           </ul>
         </template>
       </div>
+      <Footer />
     </div>
-    <Footer />
   </section>
 </template>
 
@@ -47,9 +47,8 @@ export default {
 .root {
   margin-top: 64px;
   @media (min-width: 720px) {
-    display: flex;
-    align-items: center;
     margin-top: 0;
+    padding-top: 80px;
   }
 }
 

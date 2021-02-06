@@ -49,11 +49,9 @@ export default {
 
 <style lang="scss" scoped>
 footer {
-  margin-bottom: 16px;
-  @media (min-width: 720px) {
-    position: absolute;
-    bottom: 16px;
+  padding: 16px 0;
 
+  @media (min-width: 720px) {
     margin-bottom: 0;
   }
 }
