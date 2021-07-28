@@ -2,7 +2,11 @@
   <section class="root">
     <div class="inner">
       <div class="infos">
-        <span v-if="bombList"> Mines: {{ bombList.length - flagNumber }} </span>
+        <transition name="fade" mode="out-in">
+          <p v-if="bombList.length">
+            Mines left: {{ bombList.length - flagNumber }}
+          </p>
+        </transition>
       </div>
       <div class="mine_container">
         <div v-for="i in boardGrid" :key="i.id" class="mine_row">
@@ -25,16 +29,18 @@
         </div>
       </div>
     </div>
-    <LoosePopup v-if="showLoosePopup" @close="closeLoosePopup()" />
+    <LoosePopup v-if="showLoosePopup" @close="closePopup()" />
+    <WinPopup v-if="showWinPopup" @close="closePopup()" />
   </section>
 </template>
 
 <script>
-import { LoosePopup } from './components'
+import { LoosePopup, WinPopup } from './components'
 
 export default {
   components: {
     LoosePopup,
+    WinPopup,
   },
 
   data() {
@@ -60,6 +66,12 @@ export default {
 
     flatGrid() {
       return this.boardGrid.map((e) => e.columns).flat()
+    },
+
+    areAllBlocksOpened() {
+      return this.flatGrid.every(
+        (block) => (block.isShowed && !block.hasBomb) || block.hasBomb
+      )
     },
   },
 
@@ -119,7 +131,10 @@ export default {
       else {
         if (colObject.isFlaged) return
         if (colObject.hasBomb) this.gameEnd('loose')
-        this.showBlock(colObject)
+        else {
+          this.showBlock(colObject)
+          if (this.areAllBlocksOpened) this.gameEnd('win')
+        }
       }
     },
 
@@ -269,8 +284,9 @@ export default {
       this.createGrid()
     },
 
-    closeLoosePopup() {
+    closePopup() {
       this.showLoosePopup = false
+      this.showWinPopup = false
       this.resetGame()
     },
   },
@@ -278,6 +294,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.infos {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+
+  p {
+    display: inline-block;
+    padding: 16px;
+    border-radius: 8px;
+
+    background-color: rgba($color: white, $alpha: 0.1);
+  }
+}
+
 .mine_row {
   display: flex;
 }
@@ -288,6 +318,7 @@ export default {
   width: 500px;
   height: 500px;
   margin: 0 auto;
+  margin-top: 16px;
   border-radius: 10px;
   overflow: hidden;
 
