@@ -63,7 +63,7 @@ export default {
   },
 
   watch: {
-    boardSize: function() {
+    boardSize() {
       this.resetGame()
     },
   },
@@ -93,13 +93,24 @@ export default {
 
     blockClick(event, rowObject, colObject) {
       if (!this.hasClicked) {
-        this.firstClick(colObject)
+        this.firstClick(colObject, rowObject)
       } else {
         this.regularClick(event, rowObject, colObject)
       }
     },
 
-    firstClick(colObject) {
+    firstClick(colObject, rowObject) {
+      console.log(colObject, rowObject)
+      const colCoordonates = this.getBlockCoordonates(colObject)
+      for (let row = -1; row < 2; row++) {
+        for (let col = -1; col < 2; col++) {
+          const gId = `${colCoordonates.row + row}-${colCoordonates.col + col}`
+          const element = this.flatGrid.find((e) => e.gId === gId)
+          if (element) {
+            element.isFirstClick = true
+          }
+        }
+      }
       colObject.isFirstClick = true
       this.hasClicked = true
       this.createBombs()
@@ -147,12 +158,14 @@ export default {
       })
     },
 
+    getBlockCoordonates: (blockObject) => ({
+      row: parseInt(blockObject.gId.split('-')[0]),
+      col: parseInt(blockObject.gId.split('-')[1]),
+    }),
+
     searchBlockForBombs(colObject) {
       if (colObject.hasBomb) return
-      const colCoordonates = {
-        row: parseInt(colObject.gId.split('-')[0]),
-        col: parseInt(colObject.gId.split('-')[1]),
-      }
+      const colCoordonates = this.getBlockCoordonates(colObject)
       let bombNumber = 0
       for (let row = -1; row < 2; row++) {
         for (let col = -1; col < 2; col++) {
@@ -170,10 +183,7 @@ export default {
 
     showSafeAreaOnClick(colObject) {
       if (colObject.bombNumber) return
-      const coordonates = {
-        row: parseInt(colObject.gId.split('-')[0]),
-        col: parseInt(colObject.gId.split('-')[1]),
-      }
+      const coordonates = this.getBlockCoordonates(colObject)
 
       for (let row = 0; row < this.boardSize; row++) {
         const test = `${coordonates.row + row}-${coordonates.col}`
@@ -196,10 +206,7 @@ export default {
     },
 
     clearBlock(colObject) {
-      const colCoordonates = {
-        row: parseInt(colObject.gId.split('-')[0]),
-        col: parseInt(colObject.gId.split('-')[1]),
-      }
+      const colCoordonates = this.getBlockCoordonates(colObject)
       for (let row = -1; row < 2; row++) {
         for (let col = -1; col < 2; col++) {
           const gId = `${colCoordonates.row + row}-${colCoordonates.col + col}`
