@@ -92,26 +92,21 @@ export default {
     },
 
     blockClick(event, rowObject, colObject) {
-      if (!this.hasClicked) {
-        this.firstClick(colObject, rowObject)
-      } else {
-        this.regularClick(event, rowObject, colObject)
-      }
+      if (!this.hasClicked) this.firstClick(colObject)
+      else this.regularClick(event, rowObject, colObject)
     },
 
-    firstClick(colObject, rowObject) {
-      console.log(colObject, rowObject)
+    firstClick(colObject) {
       const colCoordonates = this.getBlockCoordonates(colObject)
+
       for (let row = -1; row < 2; row++) {
         for (let col = -1; col < 2; col++) {
           const gId = `${colCoordonates.row + row}-${colCoordonates.col + col}`
           const element = this.flatGrid.find((e) => e.gId === gId)
-          if (element) {
-            element.isFirstClick = true
-          }
+
+          if (element) element.isFirstClick = true
         }
       }
-      colObject.isFirstClick = true
       this.hasClicked = true
       this.createBombs()
       colObject.isShowed = true
@@ -125,29 +120,26 @@ export default {
       } else {
         if (colObject.isFlaged) return
         if (colObject.hasBomb) this.gameEnd('loose')
-        this.showBlock(rowObject, colObject)
+        this.showBlock(colObject)
       }
     },
 
     flagClick(rowObject, colObject) {
-      if (colObject.isFlaged) {
-        this.unflagBlock(rowObject, colObject)
-      } else {
-        this.flagBlock(rowObject, colObject)
-      }
+      if (colObject.isFlaged) this.unflagBlock(colObject)
+      else this.flagBlock(colObject)
     },
 
-    flagBlock(rowObject, colObject) {
+    flagBlock(colObject) {
       this.flagNumber++
       colObject.isFlaged = true
     },
 
-    unflagBlock(rowObject, colObject) {
+    unflagBlock(colObject) {
       this.flagNumber--
       colObject.isFlaged = false
     },
 
-    showBlock(rowObject, colObject) {
+    showBlock(colObject) {
       colObject.isShowed = true
       this.showSafeAreaOnClick(colObject)
     },
@@ -165,16 +157,16 @@ export default {
 
     searchBlockForBombs(colObject) {
       if (colObject.hasBomb) return
+
       const colCoordonates = this.getBlockCoordonates(colObject)
       let bombNumber = 0
+
       for (let row = -1; row < 2; row++) {
         for (let col = -1; col < 2; col++) {
           const gId = `${colCoordonates.row + row}-${colCoordonates.col + col}`
           const element = this.flatGrid.find((e) => e.gId === gId)
 
-          if (element?.hasBomb) {
-            bombNumber++
-          }
+          if (element?.hasBomb) bombNumber++
         }
       }
 
@@ -183,6 +175,7 @@ export default {
 
     showSafeAreaOnClick(colObject) {
       if (colObject.bombNumber) return
+
       const coordonates = this.getBlockCoordonates(colObject)
 
       for (let row = 0; row < this.boardSize; row++) {
@@ -198,8 +191,10 @@ export default {
         for (let col = 0; col < this.boardSize; col++) {
           const gId = `${coordonates.row + row}-${coordonates.col + col}`
           const element = this.flatGrid.find((e) => e.gId === gId)
+
           if (element === undefined) break
           if (element.bombNumber > 0 || element.hasBomb) break
+
           this.clearBlock(element)
         }
       }
@@ -207,26 +202,26 @@ export default {
 
     clearBlock(colObject) {
       const colCoordonates = this.getBlockCoordonates(colObject)
+
       for (let row = -1; row < 2; row++) {
         for (let col = -1; col < 2; col++) {
           const gId = `${colCoordonates.row + row}-${colCoordonates.col + col}`
           const element = this.flatGrid.find((e) => e.gId === gId)
-          if (element) {
-            element.isShowed = true
-          }
+
+          if (element) element.isShowed = true
         }
       }
     },
 
     createBombs() {
-      for (let bomb = 0; bomb < this.bombNumber; bomb++) {
-        this.setRandomBomb()
-      }
+      for (let bomb = 0; bomb < this.bombNumber; bomb++) this.setRandomBomb()
+
       this.setBombNumber()
     },
 
     setRandomBomb() {
       const randomBlock = this.flatGrid[this.getRandomBombId()]
+
       if (randomBlock.isFirstClick) return
       if (randomBlock.hasBomb) {
         this.setRandomBomb()
@@ -249,7 +244,7 @@ export default {
     gameEnd(status) {
       switch (status) {
         case 'loose':
-          this.showLoosePopup = true
+          this.looseGame()
           break
 
         case 'win':
@@ -259,6 +254,11 @@ export default {
         default:
           break
       }
+    },
+
+    looseGame() {
+      this.showLoosePopup = true
+      this.flatGrid.forEach((element) => (element.isShowed = true))
     },
 
     resetGame() {
