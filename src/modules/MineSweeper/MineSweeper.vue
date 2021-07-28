@@ -15,7 +15,8 @@
               { isFlaged: j.isFlaged },
               { hasBomb: j.hasBomb && j.isShowed },
             ]"
-            @click="blockClick($event, i, j)"
+            @click="blockClick($event, j)"
+            @contextmenu="flagClick($event, j)"
           >
             <span v-if="showBlockNumber(j)">
               {{ showBlockNumber(j) }}
@@ -91,9 +92,9 @@ export default {
       }
     },
 
-    blockClick(event, rowObject, colObject) {
+    blockClick(event, colObject) {
       if (!this.hasClicked) this.firstClick(colObject)
-      else this.regularClick(event, rowObject, colObject)
+      else this.regularClick(event, colObject)
     },
 
     firstClick(colObject) {
@@ -113,20 +114,19 @@ export default {
       this.showSafeAreaOnClick(colObject)
     },
 
-    regularClick(event, rowObject, colObject) {
+    regularClick(event, colObject) {
       if (colObject.isShowed) return
-      if (event.shiftKey) {
-        this.flagClick(rowObject, colObject)
-      } else {
+      else {
         if (colObject.isFlaged) return
         if (colObject.hasBomb) this.gameEnd('loose')
         this.showBlock(colObject)
       }
     },
 
-    flagClick(rowObject, colObject) {
+    flagClick(event, colObject) {
       if (colObject.isFlaged) this.unflagBlock(colObject)
       else this.flagBlock(colObject)
+      event.preventDefault()
     },
 
     flagBlock(colObject) {
