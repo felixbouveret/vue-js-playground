@@ -8,7 +8,12 @@
           <h2 v-if="route.path !== '/'" :key="routeIndex + '-title'">
             {{ route.name }}
           </h2>
-          <ul v-if="route.path !== '/'" :key="routeIndex" class="nav-list">
+          <ul
+            v-if="route.path !== '/'"
+            :key="routeIndex"
+            class="nav-list"
+            :class="listType(route.children)"
+          >
             <template v-for="(child, childIndex) in route.children">
               <li v-if="child.path !== ''" :key="childIndex" class="nav-block">
                 <router-link
@@ -31,6 +36,8 @@ import routes from '@/router/routes'
 import Footer from '@/components/Footer'
 
 export default {
+  name: 'Home',
+
   components: {
     Footer,
   },
@@ -38,7 +45,23 @@ export default {
   data() {
     return {
       routes: routes,
+      test: 0,
     }
+  },
+
+  computed: {
+    testA() {
+      return this.test % 2
+    },
+  },
+
+  methods: {
+    listType(list) {
+      const filteredList = list.filter((l) => l.path !== '')
+      if (filteredList.length % 3 === 0) return 'col-3'
+      if (filteredList.length % 2 === 0) return 'col-2'
+      return 'col-3'
+    },
   },
 }
 </script>
@@ -66,10 +89,12 @@ h2 {
   max-width: 800px;
   margin: 64px auto 64px;
 }
+
 .nav-list {
   display: grid;
   grid-gap: 16px;
   margin-bottom: 48px;
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -78,9 +103,14 @@ h2 {
     grid-gap: 16px;
     grid-template-columns: repeat(2, 1fr);
   }
+
   @media (min-width: 720px) {
     grid-gap: 32px;
     grid-template-columns: repeat(3, 1fr);
+
+    &.col-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 
