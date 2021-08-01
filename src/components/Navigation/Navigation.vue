@@ -4,11 +4,7 @@
       <div class="inner">
         <div>
           <router-link to="/" class="back-button">
-            <img
-              svg-inline
-              src="@/assets/Header/icons/left-arrow.svg"
-              class="arrow"
-            />
+            <LeftArrow class="arrow" />
             Retour
           </router-link>
         </div>
@@ -17,7 +13,7 @@
           :class="{ isOpen: isInputShown }"
           @click="showInput"
         >
-          <img svg-inline src="@/assets/Header/icons/edit.svg" alt="edit" />
+          <Edit />
           <p v-if="!isInputShown">
             {{ usernameDisplayed }}
           </p>
@@ -39,8 +35,17 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import LeftArrow from '@/assets/Header/icons/left-arrow.svg'
+import Edit from '@/assets/Header/icons/edit.svg'
 
 export default {
+  name: 'Navigation',
+
+  components: {
+    LeftArrow,
+    Edit,
+  },
+
   data() {
     return {
       usernameDisplayed: this.$store.state.app.username
@@ -117,6 +122,7 @@ header .inner {
 }
 
 svg {
+  width: 24px;
   height: 12px;
 
   transition: fill 0.3s;

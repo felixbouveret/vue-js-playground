@@ -3,20 +3,12 @@
     <ul>
       <li>
         <a href="https://github.com/felixbouveret" target="_blank">
-          <img
-            svg-inline
-            src="@/assets/Footer/icons/github.svg"
-            alt="Github Logo"
-          />
+          <GithubLogo height="24px" width="24px" />
         </a>
       </li>
       <li>
         <a href="https://twitter.com/felixbouveret" target="_blank">
-          <img
-            svg-inline
-            src="@/assets/Footer/icons/twitter.svg"
-            alt="Twitter Logo"
-          />
+          <TwitterLogo />
         </a>
       </li>
       <li>
@@ -24,11 +16,7 @@
           href="https://www.linkedin.com/in/f%C3%A9lix-bouveret-010005150/"
           target="_blank"
         >
-          <img
-            svg-inline
-            src="@/assets/Footer/icons/linkedin.svg"
-            alt="Linkedin Logo"
-          />
+          <LinkedinLogo height="24px" width="24px" />
         </a>
       </li>
     </ul>
@@ -37,7 +25,19 @@
 </template>
 
 <script>
+import LinkedinLogo from '@/assets/Footer/icons/linkedin.svg'
+import GithubLogo from '@/assets/Footer/icons/github.svg'
+import TwitterLogo from '@/assets/Footer/icons/twitter.svg'
+
 export default {
+  name: 'Footer',
+
+  components: {
+    LinkedinLogo,
+    GithubLogo,
+    TwitterLogo,
+  },
+
   computed: {
     getYear() {
       const currentDate = new Date()
