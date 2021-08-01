@@ -16,35 +16,35 @@ export default {
   data() {
     return {
       word: null,
-    };
+    }
   },
   computed: {
     reversWord() {
       if (this.word && this.word.length > 1) {
-        const splitWord = this.word.split("");
-        const isOdd = splitWord.length % 2;
+        const splitWord = this.word.split('')
+        const isOdd = splitWord.length % 2
 
-        let firstLetterId = this.word.length - 1;
+        let firstLetterId = this.word.length - 1
         for (
           let lastLetterId = 0;
           lastLetterId < splitWord.length / 2 + isOdd;
           lastLetterId++
         ) {
-          const lastLetter = splitWord[lastLetterId];
-          const firstLetter = splitWord[firstLetterId];
+          const lastLetter = splitWord[lastLetterId]
+          const firstLetter = splitWord[firstLetterId]
 
           if (lastLetter !== firstLetter) {
-            firstLetterId--;
-            return false;
+            firstLetterId--
+            return false
           }
-          firstLetterId--;
+          firstLetterId--
         }
-        return true;
+        return true
       }
-      return false;
+      return false
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

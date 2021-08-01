@@ -23,23 +23,23 @@ export default {
     return {
       SIMON_BLOCKS: [
         {
-          color: "yellow",
-          sound: new Audio(require("@/assets/sounds/Simon/yellow.mp3")),
+          color: 'yellow',
+          sound: new Audio(require('@/assets/sounds/Simon/yellow.mp3')),
           active: false,
         },
         {
-          color: "blue",
-          sound: new Audio(require("@/assets/sounds/Simon/blue.mp3")),
+          color: 'blue',
+          sound: new Audio(require('@/assets/sounds/Simon/blue.mp3')),
           active: false,
         },
         {
-          color: "red",
-          sound: new Audio(require("@/assets/sounds/Simon/green.mp3")),
+          color: 'red',
+          sound: new Audio(require('@/assets/sounds/Simon/green.mp3')),
           active: false,
         },
         {
-          color: "green",
-          sound: new Audio(require("@/assets/sounds/Simon/red.mp3")),
+          color: 'green',
+          sound: new Audio(require('@/assets/sounds/Simon/red.mp3')),
           active: false,
         },
       ],
@@ -47,20 +47,20 @@ export default {
       PLAYER_PATH: [],
       error: {
         isError: false,
-        sound: new Audio(require("@/assets/sounds/Simon/error.mp3")),
+        sound: new Audio(require('@/assets/sounds/Simon/error.mp3')),
       },
 
       button: {
         start: {
-          text: "Start",
+          text: 'Start',
           function: () => this.startSimon(),
         },
         restart: {
-          text: "Restart",
+          text: 'Restart',
           function: () => this.startSimon(),
         },
         stop: {
-          text: "Stop",
+          text: 'Stop',
           function: () => this.stopSimon(),
         },
       },
@@ -68,65 +68,93 @@ export default {
       simonsTurn: false,
       isFirstGame: true,
       simonRunning: false,
-    };
+    }
+  },
+
+  computed: {
+    checkPlayerMoves() {
+      for (let i = 0; i < this.PLAYER_PATH.length; i++) {
+        const move = this.PLAYER_PATH[i]
+        console.log(move)
+        console.log(this.SIMON_PATH)
+        if (
+          move !== this.SIMON_PATH[i] ||
+          this.PLAYER_PATH.length > this.SIMON_PATH.length
+        ) {
+          return false
+        }
+      }
+      return true
+    },
+
+    gameButton() {
+      if (this.simonRunning) {
+        return this.button.stop
+      }
+      if (this.isFirstGame) {
+        return this.button.start
+      } else {
+        return this.button.restart
+      }
+    },
   },
 
   methods: {
     startSimon() {
-      this.simonRunning = true;
-      this.isFirstGame = false;
-      this.resetSimon();
-      this.prepareSimon();
+      this.simonRunning = true
+      this.isFirstGame = false
+      this.resetSimon()
+      this.prepareSimon()
     },
 
     resetSimon() {
-      this.SIMON_PATH = [];
-      this.PLAYER_PATH = [];
+      this.SIMON_PATH = []
+      this.PLAYER_PATH = []
     },
 
     onBlockClick(blockIndex) {
-      this.PLAYER_PATH.push(blockIndex);
+      this.PLAYER_PATH.push(blockIndex)
       if (this.checkPlayerMoves) {
-        this.blinkBlock(blockIndex);
+        this.blinkBlock(blockIndex)
       }
 
       if (
         this.PLAYER_PATH.length === this.SIMON_PATH.length &&
         this.checkPlayerMoves
       ) {
-        this.PLAYER_PATH = [];
+        this.PLAYER_PATH = []
         setTimeout(() => {
-          this.onSimonsTurn();
-          console.log("simon s turn");
-        }, 500);
+          this.onSimonsTurn()
+          console.log('simon s turn')
+        }, 500)
       } else if (!this.checkPlayerMoves) {
-        this.stopSimon();
+        this.stopSimon()
       }
     },
 
     onSimonsTurn() {
-      const randomBlock = Math.floor(Math.random() * 4);
-      this.SIMON_PATH.push(randomBlock);
-      this.simonsTurn = false;
+      const randomBlock = Math.floor(Math.random() * 4)
+      this.SIMON_PATH.push(randomBlock)
+      this.simonsTurn = false
 
-      let blockIndex = 0;
+      let blockIndex = 0
 
       const blockTimer = setInterval(() => {
         if (blockIndex === this.SIMON_PATH.length) {
-          blockIndex = 0;
-          this.simonsTurn = true;
-          window.clearInterval(blockTimer);
+          blockIndex = 0
+          this.simonsTurn = true
+          window.clearInterval(blockTimer)
         } else {
-          this.blinkBlock(this.SIMON_PATH[blockIndex]);
+          this.blinkBlock(this.SIMON_PATH[blockIndex])
         }
-        blockIndex++;
-      }, 700);
+        blockIndex++
+      }, 700)
     },
 
     stopSimon() {
-      this.simonRunning = false;
-      this.flashError();
-      this.resetSimon();
+      this.simonRunning = false
+      this.flashError()
+      this.resetSimon()
     },
 
     prepareSimon() {
@@ -135,64 +163,36 @@ export default {
         blockIndex < this.SIMON_BLOCKS.length;
         blockIndex++
       ) {
-        this.blinkBlock(blockIndex, false);
+        this.blinkBlock(blockIndex, false)
       }
       setTimeout(() => {
-        this.onSimonsTurn();
-      }, 500);
+        this.onSimonsTurn()
+      }, 500)
     },
 
     blinkBlock(blockIndex, hasSound = false) {
       if (hasSound) {
-        this.SIMON_BLOCKS[blockIndex].sound.load();
-        this.SIMON_BLOCKS[blockIndex].sound.play();
+        this.SIMON_BLOCKS[blockIndex].sound.load()
+        this.SIMON_BLOCKS[blockIndex].sound.play()
       }
 
-      this.SIMON_BLOCKS[blockIndex].active = true;
+      this.SIMON_BLOCKS[blockIndex].active = true
       setTimeout(() => {
-        this.SIMON_BLOCKS[blockIndex].active = false;
-      }, 400);
+        this.SIMON_BLOCKS[blockIndex].active = false
+      }, 400)
     },
 
     flashError() {
       // this.error.sound.load();
       // this.error.sound.play();
 
-      this.error.isError = true;
+      this.error.isError = true
       setTimeout(() => {
-        this.error.isError = false;
-      }, 1000);
+        this.error.isError = false
+      }, 1000)
     },
   },
-
-  computed: {
-    checkPlayerMoves() {
-      for (let i = 0; i < this.PLAYER_PATH.length; i++) {
-        const move = this.PLAYER_PATH[i];
-        console.log(move);
-        console.log(this.SIMON_PATH);
-        if (
-          move !== this.SIMON_PATH[i] ||
-          this.PLAYER_PATH.length > this.SIMON_PATH.length
-        ) {
-          return false;
-        }
-      }
-      return true;
-    },
-
-    gameButton() {
-      if (this.simonRunning) {
-        return this.button.stop;
-      }
-      if (this.isFirstGame) {
-        return this.button.start;
-      } else {
-        return this.button.restart;
-      }
-    },
-  },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -257,7 +257,7 @@ export default {
 
     transition: ease 0.3s;
 
-    content: "";
+    content: '';
   }
 }
 

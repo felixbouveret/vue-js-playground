@@ -6,10 +6,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
-import SnakeModule from "@/modules/Snake";
-import ScoreBoard from "@/components/ScoreBoard";
+import { mapGetters } from 'vuex'
+import SnakeModule from '@/modules/Snake'
+import ScoreBoard from '@/components/ScoreBoard'
 
 export default {
   components: {
@@ -20,13 +19,13 @@ export default {
   data() {
     return {
       isGameStarted: false,
-    };
+    }
   },
 
   computed: {
-    ...mapGetters("games", ["getSnakeSortedScores"]),
+    ...mapGetters('games', ['getSnakeSortedScores']),
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
