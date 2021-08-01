@@ -4,11 +4,7 @@
       <div class="inner">
         <div>
           <router-link to="/" class="back-button">
-            <img
-              svg-inline
-              src="@/assets/Header/icons/left-arrow.svg"
-              class="arrow"
-            />
+            <LeftArrow class="arrow" />
             Retour
           </router-link>
         </div>
@@ -17,15 +13,15 @@
           :class="{ isOpen: isInputShown }"
           @click="showInput"
         >
-          <img svg-inline src="@/assets/Header/icons/edit.svg" alt="edit" />
+          <Edit />
           <p v-if="!isInputShown">
             {{ usernameDisplayed }}
           </p>
           <input
             v-show="isInputShown"
             ref="input"
-            type="text"
             v-model="usernameDisplayed"
+            type="text"
             @keydown="isHitingEnter"
           />
         </div>
@@ -38,49 +34,58 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations } from 'vuex'
+import LeftArrow from '@/assets/Header/icons/left-arrow.svg'
+import Edit from '@/assets/Header/icons/edit.svg'
 
 export default {
+  name: 'Navigation',
+
+  components: {
+    LeftArrow,
+    Edit,
+  },
+
   data() {
     return {
       usernameDisplayed: this.$store.state.app.username
         ? this.$store.state.app.username
-        : "Anonymous",
+        : 'Anonymous',
       isInputShown: false,
-    };
+    }
   },
 
   computed: {
-    ...mapState("app", ["username"]),
+    ...mapState('app', ['username']),
   },
 
   methods: {
-    ...mapMutations("app", ["SET_USERNAME"]),
+    ...mapMutations('app', ['SET_USERNAME']),
 
     showInput() {
-      this.isInputShown = true;
+      this.isInputShown = true
       setTimeout(() => {
-        this.$refs.input.focus();
-      }, 50);
+        this.$refs.input.focus()
+      }, 50)
     },
 
     isHitingEnter(event) {
-      if (event.code === "Enter") {
-        this.hideInput();
+      if (event.code === 'Enter') {
+        this.hideInput()
       }
     },
 
     hideInput() {
-      this.isInputShown = false;
+      this.isInputShown = false
 
-      if (this.usernameDisplayed !== "") {
-        this.SET_USERNAME(this.usernameDisplayed);
+      if (this.usernameDisplayed !== '') {
+        this.SET_USERNAME(this.usernameDisplayed)
       } else {
-        this.usernameDisplayed = this.username;
+        this.usernameDisplayed = this.username
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -88,6 +93,7 @@ header {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
 
   width: 100%;
 }
@@ -116,6 +122,7 @@ header .inner {
 }
 
 svg {
+  width: 24px;
   height: 12px;
 
   transition: fill 0.3s;
@@ -156,7 +163,7 @@ svg {
     transition-duration: 0.3s;
     transition-property: opacity;
 
-    content: "";
+    content: '';
   }
 
   &.isOpen,

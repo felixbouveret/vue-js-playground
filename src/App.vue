@@ -9,18 +9,18 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation";
+import Navigation from '@/components/Navigation'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Navigation,
   },
   watch: {
     $route(to) {
-      document.title = to.meta.title || "Playground";
+      document.title = to.meta.title || 'Playground'
     },
   },
-};
+}
 </script>
 
 <style>

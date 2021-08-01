@@ -1,15 +1,15 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-import app from "./app";
-import games from "./games";
+import app from './app'
+import games from './games'
 
 const dataState = createPersistedState({
-  paths: ["games", "app"],
-});
+  paths: ['games', 'app'],
+})
 
 export default new Vuex.Store({
   plugins: [dataState],
@@ -17,4 +17,4 @@ export default new Vuex.Store({
     games,
     app,
   },
-});
+})
