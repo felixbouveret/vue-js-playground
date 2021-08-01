@@ -1,13 +1,17 @@
 <template>
   <section class="root">
     <div class="inner">
-      <div class="infos">
-        <transition name="fade" mode="out-in">
-          <p v-if="bombList.length">
-            Mines left: {{ bombList.length - flagNumber }}
-          </p>
-        </transition>
-      </div>
+      <GameMenu
+        :is-displayed="!!bombList.length"
+        :infos-list="[formatedMinesLeft, formatedTimer]"
+        :actions-list="[resetButtonData]"
+        @reset="resetGame()"
+      />
+      <transition name="fade" mode="out-in">
+        <p v-if="!!!bombList.length" class="subtitle">
+          Please click inside the grid
+        </p>
+      </transition>
       <div class="mine_container">
         <div v-for="i in boardGrid" :key="i.id" class="mine_row">
           <div
@@ -35,12 +39,16 @@
 </template>
 
 <script>
+import GameMenu from '@/components/GameMenu'
+import ResetIcon from '@/assets/reset.svg'
+
 import { LoosePopup, WinPopup } from './components'
 
 export default {
   components: {
     LoosePopup,
     WinPopup,
+    GameMenu,
   },
 
   data() {
@@ -52,6 +60,9 @@ export default {
       hasClicked: false,
       showLoosePopup: false,
       showWinPopup: false,
+      testTimer: '00:00',
+      startingTime: null,
+      interval: null,
     }
   },
 
@@ -72,6 +83,21 @@ export default {
       return this.flatGrid.every(
         (block) => (block.isShowed && !block.hasBomb) || block.hasBomb
       )
+    },
+
+    formatedMinesLeft() {
+      return `Mines left: ${this.bombList.length - this.flagNumber}`
+    },
+
+    formatedTimer() {
+      return `Timer: ${this.testTimer}`
+    },
+
+    resetButtonData() {
+      return {
+        emit: 'reset',
+        icon: ResetIcon,
+      }
     },
   },
 
@@ -111,6 +137,8 @@ export default {
 
     firstClick(colObject) {
       const colCoordonates = this.getBlockCoordonates(colObject)
+      this.startingTime = new Date()
+      this.interval = setInterval(this.timer, 1000)
 
       for (let row = -1; row < 2; row++) {
         for (let col = -1; col < 2; col++) {
@@ -281,7 +309,9 @@ export default {
       this.flagNumber = 0
       this.boardGrid = []
       this.bombList = []
+      this.testTimer = '00:00'
       this.createGrid()
+      clearInterval(this.interval)
     },
 
     closePopup() {
@@ -289,23 +319,24 @@ export default {
       this.showWinPopup = false
       this.resetGame()
     },
+
+    timer() {
+      const d = new Date()
+      const time = new Date(d.getTime() - this.startingTime.getTime())
+      this.testTimer = time
+        .toLocaleTimeString()
+        .split(':')
+        .splice(1, 2)
+        .join(':')
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.infos {
-  color: white;
-  font-weight: 600;
-  font-size: 18px;
-
-  p {
-    display: inline-block;
-    padding: 16px;
-    border-radius: 8px;
-
-    background-color: rgba($color: white, $alpha: 0.1);
-  }
+.subtitle {
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .mine_row {
@@ -315,10 +346,12 @@ export default {
 .mine_container {
   display: grid;
   box-sizing: initial;
-  width: 500px;
-  height: 500px;
+  width: 90vw;
+  max-width: 500px;
+  height: 90vw;
+  max-height: 500px;
   margin: 0 auto;
-  margin-top: 16px;
+  margin-top: 32px;
   border-radius: 10px;
   overflow: hidden;
 
